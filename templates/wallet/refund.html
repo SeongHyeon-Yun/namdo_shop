@@ -1,0 +1,66 @@
+{% extends "config/mypage_base.html" %}
+{% load static %}
+{% block extend_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/wallet/refund.css" %}">
+{% endblock extend_css %}
+{% block mypage_contents %}
+    <div class="refund-area">
+        <div class="title">환급 신청</div>
+        <div class="info-box">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {% if message.tags == 'error' %}alert-danger {% elif message.tags == 'success' %}alert-success {% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form method="post" id="refundForm">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <input type="text"
+                           class="form-control"
+                           id="floatingInput"
+                           name="bank"
+                           placeholder="은행명"
+                           required>
+                    <label for="floatingInput">은행명</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text"
+                           class="form-control"
+                           id="floatingInput"
+                           name="user_name"
+                           placeholder="예금주"
+                           required>
+                    <label for="floatingInput">예금주</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text"
+                           class="form-control"
+                           id="floatingInput"
+                           name="bank_num"
+                           placeholder="계좌번호"
+                           required>
+                    <label for="floatingInput">계좌번호</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text"
+                           class="form-control"
+                           oninput="only_number(this)"
+                           id="refund_value"
+                           name="refund_value"
+                           placeholder="환급금액"
+                           required>
+                    <label for="refund_value">환급 금액 (원)</label>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="button" id="refundBtn" class="btn btn-dark btn-sm">환급 신청</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock mypage_contents %}
+{% block extend_js %}
+    <script src="{% static "js/wallet/refund.js" %}"></script>
+{% endblock extend_js %}

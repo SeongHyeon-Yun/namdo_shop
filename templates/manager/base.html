@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <title>관리자 페이지</title>
+        <link rel="stylesheet" href="{% static "css/manager/base.css" %}">
+        {% block extend_css %}
+        {% endblock extend_css %}
+    </head>
+    <body>
+        <nav id="nav">
+            <div class="logo">남도 청년 관리자</div>
+            <div class="nav-title">
+                <span>메인화면</span>
+            </div>
+            <div class="nav-title">
+                <span>상품 관리</span>
+            </div>
+            <div class="nav-title">
+                <span>주문 관리</span>
+                <div class="nav-number">1</div>
+            </div>
+            <div class="nav-title">
+                <span>배송 관리</span>
+                <div class="nav-number">99</div>
+            </div>
+            <div class="nav-title">
+                <span>예치금 관리</span>
+                <div class="nav-number">12</div>
+            </div>
+            <div class="nav-title">
+                <span>회원 관리</span>
+                <div class="nav-number">43</div>
+            </div>
+        </nav>
+        <main>
+            <div class="top-menu">
+                <img id="menu"
+                     src="{% static "/images/manager/icon/Menu.svg" %}"
+                     alt=""
+                     width=""
+                     height="">
+                <div class="info">
+                    <img src="{% static "/images/manager/icon/Bell.svg" %}"
+                         alt=""
+                         width=""
+                         height="">
+                    <span class="name" id="name">{{ user.user_id }}</span>
+                    <div class="arrow-down"></div>
+                    <div class="user-menu-box active" id="user-menu-box">
+                        <span><a href="{% url "manager:logout_view" %}">로그아웃</a></span>
+                    </div>
+                </div>
+            </div>
+            {% block contents %}
+            {% endblock contents %}
+        </main>
+        <script src="{% static "js/manager/base.js" %}"></script>
+        {% block extend_js %}
+        {% endblock extend_js %}
+    </body>
+</html>

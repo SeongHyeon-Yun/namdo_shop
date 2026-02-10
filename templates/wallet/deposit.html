@@ -1,0 +1,59 @@
+{% extends "config/mypage_base.html" %}
+{% load static %}
+{% block extend_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/wallet/deposit.css" %}">
+{% endblock extend_css %}
+{% block mypage_contents %}
+    <div class="deposit-area">
+        <form method="post">
+            {% csrf_token %}
+            <div class="title">예치금 충전</div>
+            <div class="form-floating mt-3 mb-3">
+                <input type="text"
+                       class="form-control"
+                       id="depoist_money"
+                       name="depoist_money"
+                       placeholder="money"
+                       oninput="only_number(this)"
+                       required>
+                <label for="depoist_money">충전하실 금액 (1만원 단위)</label>
+                <span class="red">* 최소 충전 금액은 10,000원 이상 입니다.</span>
+            </div>
+            <div class="border p-3 mt-3">
+                <label class="form-check-label fw-bold mb-1" for="gridRadios1">결제 수단</label>
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio"
+                           name="payment_type"
+                           id="gridRadios1"
+                           value="bank"
+                           checked>
+                    <label class="form-check-label" for="gridRadios1">무통장 입금</label>
+                </div>
+            </div>
+            <div class="form-floating mt-3 mb-3">
+                <input type="text"
+                       class="form-control"
+                       id="user_input"
+                       name="user_input"
+                       placeholder="입금자 명"
+                       required>
+                <label for="user_input">입금자 명</label>
+            </div>
+            <div class="border mt-3 deposit-info">
+                <span class="text-start fw-bold">입금계좌 안내</span>
+                <span class="text-start">
+                    <span class="fw-bold">계좌정보 :</span> 신한은행 110-380-127772 <span class="fw-bold">박장규</span>
+                </span>
+                <span class="text-start red">신청하신 금액과 입금액이 일치해야 처리 됩니다.</span>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-dark btn-sm">충전하기</button>
+            </div>
+        </form>
+    </div>
+{% endblock mypage_contents %}
+{% block extend_js %}
+    <script src="{% static "js/wallet/deposit.js" %}"></script>
+{% endblock extend_js %}

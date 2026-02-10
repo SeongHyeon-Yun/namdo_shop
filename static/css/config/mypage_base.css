@@ -1,0 +1,82 @@
+.mypage-area h2 {
+    text-align: center;
+    padding: 30px 0;
+    font-weight: bold;
+}
+
+.mypage-box {
+    display: flex;
+}
+
+.list-group-item.title {
+    font-weight: bold;
+}
+
+.list-group-item {
+    font-size: 14px;
+}
+
+.mypage-box .right-con {
+    flex: 1;
+    padding: 10px;
+    min-width: 0;
+}
+
+.curser {
+    cursor: pointer;
+}
+
+.profile-box {
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.profile-img img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.money-box {
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.info-box {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.info-box:last-child {
+    border-bottom: none;
+}
+
+.info-box .title {
+    font-weight: bold;
+    color: var(--color-main-color);
+}
+
+.border {
+    border-radius: 15px;
+}

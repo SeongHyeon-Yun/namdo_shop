@@ -1,0 +1,70 @@
+.order-area .title {
+    border-bottom: 1px solid var(--color-border-color);
+    font-weight: bold;
+}
+
+.order-area .row {
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+}
+
+.order-area .order-box {
+    border: 1px solid var(--color-border-color);
+}
+
+.order-area .list-group-item {
+    cursor: pointer;
+}
+
+.order-area .list-item {
+    height: 300px;
+    overflow: auto;
+}
+
+.order-area .list-item .table-area {
+    width: 2450px;
+}
+
+.order-area .list-item .table-area table thead tr th {
+    font-size: 14px;
+    text-align: center;
+
+}
+
+.order-area .list-item .table-area table tbody tr td {
+    font-size: 12px;
+    text-align: center;
+
+}
+
+.list_num {
+    width: 50px;
+}
+
+.order_num,
+.receiver_name,
+.order_name,
+.count,
+.post_code,
+.status {
+    width: 100px;
+}
+
+.order_phone,
+.receiver_phone {
+    width: 150px;
+}
+
+.product,
+.address {
+    width: 500px;
+}
+
+.delivery_msg {
+    width: 300px;
+}
+
+.option {
+    width: 200px;
+}

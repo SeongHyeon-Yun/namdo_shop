@@ -1,0 +1,31 @@
+{% extends "config/base.html" %}
+{% load static %}
+{% block extend_css %}
+    <link rel="stylesheet" href="{% static "css/accounts/login.css" %}">
+{% endblock extend_css %}
+{% block contents %}
+    <div class="container login-area">
+        <h2>회원 로그인</h2>
+        <div class="login-box">
+            {% if messages %}
+                {% for message in messages %}<div class="alert alert-success">{{ message }}</div>{% endfor %}
+            {% endif %}
+            {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+            <form action="{% url "accounts:login" %}" method="post">
+                {% csrf_token %}
+                <input class="form-control" type="text" name="user_id" placeholder="아이디">
+                <input class="form-control mt-2"
+                       type="password"
+                       name="password"
+                       placeholder="비밀번호">
+                <div class="d-grid gap-2 mt-2">
+                    <button class="btn btn-primary" type="submit">로그인</button>
+                </div>
+            </form>
+            <div class="d-grid gap-2 mt-4">
+                <a href="{% url "accounts:join" %}" class="btn btn-dark">회원가입</a>
+                <button type="button" class="btn btn-light">회원정보 찾기</button>
+            </div>
+        </div>
+    </div>
+{% endblock contents %}

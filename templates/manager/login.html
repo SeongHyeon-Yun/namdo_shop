@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <title>관리자 페이지</title>
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" />
+        <link rel="stylesheet" href="{% static "css/manager/login.css" %}">
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            <div class="login-wrap">
+                <img src="{% static "images/manager/login.png" %}"
+                     alt="#"
+                     width=""
+                     height="">
+                <div class="login-box">
+                    {% if messages %}
+                        {% for message in messages %}<div class="alert">{{ message }}</div>{% endfor %}
+                    {% endif %}
+                    <div class="title">
+                        <h2>남도 청년 관리자</h2>
+                    </div>
+                    <div class="input">
+                        <p>아이디</p>
+                        <input name="manager_id" type="text" placeholder="아이디를 입력하세요" required>
+                    </div>
+                    <div class="input">
+                        <p>비밀번호</p>
+                        <input name="manager_pw" type="password" placeholder="비밀번호를 입력하세요" required>
+                    </div>
+                    <button type="submit">로그인</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

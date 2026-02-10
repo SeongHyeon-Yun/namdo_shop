@@ -1,0 +1,89 @@
+@media (max-width: 768px) {
+    .hidden {
+        display: block !important;
+    }
+
+    .menu-hidden {
+        display: none !important;
+    }
+
+    .offcanvas {
+        width: 250px !important;
+        background-color: var(--color-bg-color);
+    }
+
+    header .bt-menus {
+        display: none !important;
+    }
+
+    footer .top-menu {
+        display: flex;
+    }
+
+    footer .top-menu .icons img {
+        width: 15px !important;
+    }
+
+    footer .top-menu .time-desc {
+        font-size: 8px !important;
+        gap: 5px !important;
+    }
+
+    footer .top-menu .time-desc span:last-child {
+        padding: 3px 5px !important;
+        border-radius: 3px !important;
+    }
+
+    footer .bt-menu .bt-top-menu {
+        display: flex;
+        justify-content: center;
+    }
+
+    footer .bt-menu .bt-top-menu span {
+        font-size: 10px !important;
+    }
+
+    footer .bt-menu .bt-bt-menu {
+        display: none !important;
+    }
+
+    .products {
+        padding: 20px 0 !important;
+    }
+
+    .login-area .login-box {
+        width: 100% !important;
+    }
+
+    .join-area .join-box .desc {
+        height: 150px !important;
+    }
+
+    .join-area .join-box .title {
+        font-size: 14px !important;
+        padding: 5px 10px !important;
+        border-top-left-radius: 8px !important;
+        border-top-right-radius: 8px !important;
+    }
+
+    .join-area .join-box .check-box {
+        border-bottom-left-radius: 8px !important;
+        border-bottom-right-radius: 8px !important;
+        padding: 5px !important;
+        font-size: 12px !important;
+    }
+
+    .join-area .join-box .user-info table {
+        font-size: 8px !important;
+    }
+
+    .join-area .join-box .all-check-box {
+        padding: 10px !important;
+        font-size: 14px !important;
+        border-radius: 5px !important;
+    }
+
+    .join-area .join-box .join-btn {
+        font-size: 14px !important;
+    }
+}

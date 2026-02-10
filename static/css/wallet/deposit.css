@@ -1,0 +1,20 @@
+.deposit-area .title {
+    border-bottom: 1px solid var(--color-border-color);
+    font-weight: bold;
+}
+
+.deposit-area .red {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.deposit-area .border {
+    border-radius: 5px;
+}
+
+.deposit-area .deposit-info {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+    gap: 10px;
+}

@@ -1,0 +1,14 @@
+.login-area h2 {
+    font-weight: bold;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.login-area .login-box {
+    width: 450px;
+    height: 400px;
+    margin: auto;
+    border-radius: 15px;
+    margin-bottom: 50px;
+    padding: 20px;
+}

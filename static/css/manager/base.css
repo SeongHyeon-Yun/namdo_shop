@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+a {
+    color: #000;
+}
+
+body {
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, "Apple SD Gothic Neo",
+        "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    background-color: #F8F8F8;
+}
+
+/* 스크롤 영역 */
+nav {
+    overflow-y: auto;
+}
+
+/* 기본 상태 */
+nav::-webkit-scrollbar {
+    width: 6px;
+}
+
+nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+nav::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+/* hover 시만 진해짐 */
+nav:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+:root {
+    --color-main-font: #8A9099;
+    --color-main-color: #304FFD;
+    --color-sub-font: #fff;
+}
+
+nav {
+    width: 200px;
+    height: 100vh;
+    background-color: var(--color-main-color);
+    color: var(--color-sub-font);
+    flex-shrink: 0;
+    font-size: 15px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+nav .logo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+nav .nav-title,
+nav .logo {
+    padding: 20px;
+    cursor: pointer;
+}
+
+nav .nav-title {
+    position: relative;
+}
+
+nav .nav-title:hover {
+    background-color: rgba(196, 196, 196, 0.15);
+}
+
+nav .nav-number {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+
+    min-width: 18px;
+    height: 18px;
+    padding: 0 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    background-color: #ff3b3b;
+    color: #fff;
+
+    border-radius: 999px;
+    line-height: 1;
+}
+
+main {
+    height: 100vh;
+    width: 100vw;
+}
+
+main .top-menu {
+    background-color: #fff;
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid #E8E9EB;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: relative;
+}
+
+main .top-menu #menu {
+    cursor: pointer;
+}
+
+main .top-menu .info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+main .top-menu .info .name {
+    transition: color .15s ease, box-shadow .15s ease;
+    cursor: pointer;
+}
+
+main .top-menu .info .name:hover {
+    box-shadow: 0 2px 6px rgba(48, 79, 253, 0.25);
+}
+
+.user-menu-box {
+    width: 100px;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+
+.user-menu-box span {
+    display: inline-block;
+    padding: 8px;
+    font-size: 12px;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid #000;
+}
+
+.active {
+    display: none;
+}

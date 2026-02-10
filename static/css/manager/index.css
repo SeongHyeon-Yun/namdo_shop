@@ -1,0 +1,58 @@
+/* 기본 상태 */
+.index .top-menus::-webkit-scrollbar {
+    height: 4px;
+}
+
+.index .top-menus::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.index .top-menus::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+/* hover 시만 진해짐 */
+.index .top-menus:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.index .top-menus {
+    display: flex;
+    gap: 5px;
+    padding: 5px;
+    overflow-x: auto;
+    cursor: grab;
+    user-select: none;
+}
+
+.index .top-menus:active {
+    cursor: grabbing;
+}
+
+.index .top-menus .menu {
+    min-width: 150px;
+    width: 150px;
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    flex-shrink: 0; 
+}
+
+.index .top-menus .menu span:nth-child(1),
+.index .top-menus .menu span:nth-child(3) {
+    color: var(--color-main-font);
+}
+
+.index .top-menus .menu span:nth-child(2) {
+    color: red;
+    font-weight: bold;
+}
+
+.index .chart {
+    width: 300px;
+    height: 500px;
+    background-color: aqua;
+}

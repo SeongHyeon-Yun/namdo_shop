@@ -1,0 +1,27 @@
+{% extends "config/mypage_base.html" %}
+{% load static %}
+{% block extend_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/accounts/excel_upload.css" %}">
+{% endblock extend_css %}
+{% block mypage_contents %}
+    <div class="excel_area">
+        <div class="title">엑셀 업로드</div>
+        {% if messages %}
+            {% for message in messages %}<div class="mt-2 alert alert-success">{{ message }}</div>{% endfor %}
+        {% endif %}
+        <label for="formFileLg" class="form-label red">* 주문하실 상품목록이 담긴 엑셀 파일을 업로드 해주세요.</label>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-group">
+                <input class="form-control form-control-lg"
+                       id="formFileLg"
+                       type="file"
+                       name="excel_file"
+                       accept=".xlsx,.xls"
+                       required>
+                <button class="btn btn-outline-secondary" type="submit">업로드</button>
+            </div>
+        </form>
+    </div>
+{% endblock mypage_contents %}

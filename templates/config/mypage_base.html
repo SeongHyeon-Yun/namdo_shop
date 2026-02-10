@@ -1,0 +1,90 @@
+{% extends "config/base.html" %}
+{% load static %}
+{% block extend_css %}
+    <link rel="stylesheet" href="{% static "css/config/mypage_base.css" %}">
+{% endblock extend_css %}
+{% block contents %}
+    <div class="container mypage-area">
+        <h2>마이페이지</h2>
+        <div class="mypage-box">
+            <div class="left-con">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item title">주문입력</li>
+                    <a href="{% url "accounts:order_excel" %}"
+                       class="cursor list-group-item {% if request.resolver_match.url_name == 'order_excel' %}active{% endif %}">
+                        엑셀 대량 주문
+                    </a>
+                    <a href="{% url "accounts:mypage" %}"
+                       class="cursor list-group-item {% if request.resolver_match.url_name == 'mypage' %}active{% endif %}">
+                        주문 상품 확인
+                    </a>
+                    <a href="{% url "accounts:excel_sample_download" %}"
+                       class="curser list-group-item">엑셀 파일 다운로드</a>
+                    <li class="curser list-group-item">상품 파일 다운로드</li>
+                </ul>
+                <ul class="list-group list-group-flush mt-2">
+                    <li class="list-group-item title">주문 리스트</li>
+                    <a href="{% url "order:order_list" %}"
+                       class="curser list-group-item {% if request.resolver_match.url_name == 'order_list' %}active{% endif %}">상품 준비중</a>
+                    <a href="{% url "order:delivery_ing" %}"
+                       class="curser list-group-item {% if request.resolver_match.url_name == 'delivery_ing' %}active{% endif %}">배송중</a>
+                    <a href="{% url "order:delivery_done" %}"
+                       class="curser list-group-item {% if request.resolver_match.url_name == 'delivery_done' %}active{% endif %}">배송완료</a>
+                    <a href="{% url "order:cancel" %}"
+                       class="curser list-group-item {% if request.resolver_match.url_name == 'cancel' %}active{% endif %}">취소 리스트</a>
+                </ul>
+                <ul class="list-group list-group-flush mt-2">
+                    <li class="list-group-item title">예치금</li>
+                    <a href="{% url "wallet:deposit" %}"
+                       class="curser list-group-item {% if request.resolver_match.url_name == 'deposit' %}active{% endif %}">충전</a>
+                    <a href="{% url "wallet:use_list" %}"
+                       class="curser list-group-item {% if request.resolver_match.url_name == 'use_list' %}active{% endif %}">사용 내역
+                    </a>
+                    <a href="{% url "wallet:refund" %}"
+                       class="curser list-group-item {% if request.resolver_match.url_name == 'refund' %}active{% endif %}">환급 신청</a>
+                    <a href="{% url "wallet:refund_list" %}"
+                       class="curser list-group-item {% if request.resolver_match.url_name == 'refund_list' %}active{% endif %}">환급 내역</a>
+                </ul>
+            </div>
+            <div class="right-con">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-md-3 p-0 border">
+                            <div class="profile-box">
+                                <div class="profile-img">
+                                    <img src="{% static "images/main/icon/user.png" %}"
+                                         alt="#"
+                                         width=""
+                                         height="">
+                                </div>
+                                <div class="user-name">{{ user.company_name }}</div>
+                            </div>
+                            <div class="money-box">
+                                <div>예치금</div>
+                                <div class="balance">
+                                    <span class="red">0</span> 원
+                                </div>
+                            </div>
+                            <div class="info-box">
+                                <div class="title">연락처</div>
+                                <div>{{ user.phone }}</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="title">이메일</div>
+                                <div>{{ user.email }}</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="title">주소</div>
+                                <div>{{ user.post_code }} {{ user.address }} {{ user.detail_address }} {{ user.extraAddress }}</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            {% block mypage_contents %}
+                            {% endblock mypage_contents %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contents %}

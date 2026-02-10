@@ -1,0 +1,54 @@
+{% extends "config/mypage_base.html" %}
+{% load static %}
+{% load humanize %}
+{% block extend_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/wallet/refund_list.css" %}">
+{% endblock extend_css %}
+{% block mypage_contents %}
+    <div class="refund-list-area">
+        <div class="title">환급 내역</div>
+        <div class="input-group mt-3">
+            <span class="input-group-text" id="start_day">시작일</span>
+            <input type="date" class="form-control" placeholder="검색어를 입력하세요">
+            <span class="input-group-text" id="close_day">종료일</span>
+            <input type="date" class="form-control" placeholder="검색어를 입력하세요">
+            <button class="btn btn-dark input-group-text" id="close_day">검색</button>
+        </div>
+        <div class="list-item mt-2">
+            <table class="table table-sm text-center">
+                <thead>
+                    <tr>
+                        <td>상태</td>
+                        <td>예금주</td>
+                        <td>은행명</td>
+                        <td>계좌번호</td>
+                        <td>금액</td>
+                        <td>신청 날짜</td>
+                        <td>승인 날짜</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for list in row_refund %}
+                        <tr>
+                            <td class="{{ list.refund_status }}">{{ list.get_refund_status_display }}</td>
+                            <td>{{ list.user_name }}</td>
+                            <td>{{ list.bank }}</td>
+                            <td>{{ list.bank_num }}</td>
+                            <td>{{ list.refund_value|intcomma }}</td>
+                            <td class="create_ad">{{ list.created_at|date:"y-m-d H:i" }}</td>
+                            {% if list.confirmed_at %}
+                                <td class="pending">{{ list.confirmed_at|date:"y-m-d H:i" }}</td>
+                            {% else %}
+                                <td class="pending">승인 대기중</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock mypage_contents %}
+{% block extend_js %}
+    <script src="{% static "js/wallet/refund.js" %}"></script>
+{% endblock extend_js %}

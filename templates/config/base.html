@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="남도청년 도매몰 입니다.">
+        <meta name="keywords" content="남도청년, 농수산물, 도매, 소매, 위탁판매">
+        <title>남도청년 몰</title>
+        <link rel="stylesheet"
+              as="style"
+              crossorigin
+              href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static "css/config/base.css" %}">
+        <link rel="stylesheet" href="{% static "css/config/mobile.css" %}">
+        {% block extend_css %}
+        {% endblock extend_css %}
+    </head>
+    <body>
+        <div id="header" class="container">{% include "config/header.html" %}</div>
+        <div id="contents" class="container-fluid">
+            {% block contents %}
+            {% endblock contents %}
+        </div>
+        <div id="footer" class="container">{% include "config/footer.html" %}</div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+                crossorigin="anonymous"></script>
+        {% block extend_js %}
+        {% endblock extend_js %}
+    </body>
+</html>

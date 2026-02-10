@@ -1,0 +1,71 @@
+{% extends "config/mypage_base.html" %}
+{% load static %}
+{% block extend_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/accounts/mypage.css" %}">
+{% endblock extend_css %}
+{% block mypage_contents %}
+    <div class="order-area">
+        <div class="title">배송 완료</div>
+        <div class="input-group mt-2">
+            <select class="form-select-sm">
+                <option selected>선택</option>
+                <option value="1">상품명</option>
+                <option value="2">주문번호</option>
+                <option value="3">송장번호</option>
+                <option value="4">수취인</option>
+                <option value="5">주문인</option>
+            </select>
+            <input type="search" class="form-control" placeholder="검색어를 입력하세요">
+            <button class="btn btn-outline-secondary" type="button">검색</button>
+        </div>
+        <div class="input-group mt-2">
+            <span class="input-group-text" id="start_day">시작일</span>
+            <input type="date" class="form-control" placeholder="검색어를 입력하세요">
+            <span class="input-group-text" id="close_day">종료일</span>
+            <input type="date" class="form-control" placeholder="검색어를 입력하세요">
+        </div>
+        <div class="list-item mt-2">
+            <div class="table-area">
+                <table class="table table-sm table-striped-columns">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col" class="list_num">No</th>
+                            <th scope="col" class="status">배송상태</th>
+                            <th scope="col" class="order_num">주문번호</th>
+                            <th scope="col" class="product">상품명</th>
+                            <th scope="col" class="option">옵션명</th>
+                            <th scope="col" class="count">구매 수량</th>
+                            <th scope="col" class="receiver_name">수취인 이름</th>
+                            <th scope="col" class="receiver_phone">수취인 전화번호</th>
+                            <th scope="col" class="post_code">우편번호</th>
+                            <th scope="col" class="address">수취인 주소</th>
+                            <th scope="col" class="delivery_msg">배송 메세지</th>
+                            <th scope="col" class="order_name">주문자</th>
+                            <th scope="col" class="order_phone">주문자 전화번호</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in rows %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>취소</td>
+                                <td>154578123</td>
+                                <td>[최저가보장] 농협 정품선별 천혜향 선물세트</td>
+                                <td>사과 + 수박 + 복숭아</td>
+                                <td>3</td>
+                                <td>윤성현</td>
+                                <td>010-4494-2470</td>
+                                <td>58690</td>
+                                <td>전라남도 목포시 신흥로 45번길 13 동아아파트 104동 1306호</td>
+                                <td>문앞에 나둬주세요</td>
+                                <td>박숙희</td>
+                                <td>010-3065-9234</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock mypage_contents %}

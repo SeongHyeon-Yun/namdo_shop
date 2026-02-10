@@ -1,0 +1,10 @@
+.user-info h2 {
+    text-align: center;
+    padding: 40px;
+    font-weight: bold;
+}
+
+.user-info .user-border {
+    border-bottom: 1px solid var(--color-border-color);
+    font-weight: bold;
+}

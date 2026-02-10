@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    font-family: 'Pretendard Variable', sans-serif;
+}
+
+body {
+    background-color: #304FFD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-wrap {
+    display: flex;
+    gap: 50px;
+}
+
+.login-box {
+    background-color: #fff;
+    width: 400px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.login-box .alert {
+    background-color: rgba(255, 96, 96, 0.7);
+    width: 300px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.login-box p {
+    font-size: 14px;
+    color: #8A9099;
+    margin-bottom: 5px;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 300px;
+    border: 1px solid #8A9099;
+    border-radius: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.login-box input[type="text"]:focus,
+.login-box input[type="password"]:focus {
+    border: 1px solid #304FFD;
+    outline: none;
+}
+
+.login-box button {
+    width: 300px;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    background-color: #304FFD;
+    color: #fff;
+}
+
+.login-box button:hover {
+    background-color: #405cff;
+    cursor: pointer;
+}
+
+.login-box button:focus {
+    outline: none;
+    background-color: #405cff;
+}

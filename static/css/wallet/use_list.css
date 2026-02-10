@@ -1,0 +1,58 @@
+.use-list .title {
+    font-weight: bold;
+    border-bottom: 1px solid var(--color-border-color);
+}
+
+.use-list .row .col {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.use-list .row .col .sub-title {
+    font-weight: bold;
+    color: var(--color-text-color);
+}
+
+.use-list .row .col .money {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.use-list .row .col.red {
+    font-size: 30px;
+}
+
+.use-list .list-item {
+    height: 250px;
+    overflow: auto;
+}
+.use-list .list-item .table thead{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.use-list .list-item .table tbody {
+    font-size: 14px;
+}
+
+.use-list .list-item .table .green {
+    color: #147700;
+    font-weight: bold;
+}
+
+.use-list .list-item .table .gray {
+    color: var(--color-text-color);
+    font-weight: bold;
+}
+
+.use-list .list-item .table .black {
+    font-weight: bold;
+    color: #222;
+}
+
+.use-list .list-item .table .red {
+    color: red;
+    font-weight: bold;
+}

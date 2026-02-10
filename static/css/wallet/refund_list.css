@@ -1,0 +1,40 @@
+.refund-list-area .title {
+    font-weight: bold;
+    border-bottom: 1px solid var(--color-border-color);
+}
+
+.refund-list-area .input-group span,
+.refund-list-area .input-group input,
+.refund-list-area .input-group button {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.refund-list-area .list-item .table thead tr td {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--color-text-color);
+}
+
+.refund-list-area .list-item .table tbody tr td {
+    font-size: 14px;
+}
+
+.refund-list-area .pending {
+    font-weight: bold;
+}
+
+.refund-list-area .confirmed {
+    font-weight: bold;
+    color: green;
+}
+
+.refund-list-area .rejected {
+    font-weight: bold;
+    color: red;
+}
+
+.refund-list-area .create_ad {
+    font-weight: bold;
+    color: var(--color-text-color);
+}

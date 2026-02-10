@@ -1,0 +1,47 @@
+{% extends "config/mypage_base.html" %}
+{% load static %}
+{% load humanize %}
+{% block extend_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/wallet/use_list.css" %}">
+{% endblock extend_css %}
+{% block mypage_contents %}
+    <div class="use-list">
+        <div class="title">예치금 사용내역</div>
+        <div class="input-group mt-3">
+            <span class="input-group-text" id="start_day">시작일</span>
+            <input type="date" class="form-control" placeholder="검색어를 입력하세요">
+            <span class="input-group-text" id="close_day">종료일</span>
+            <input type="date" class="form-control" placeholder="검색어를 입력하세요">
+            <button class="btn btn-dark input-group-text" id="close_day">검색</button>
+        </div>
+        <div class="list-item mt-2">
+            <table class="table table-sm text-center">
+                <thead>
+                    <tr>
+                        <td>현재 상태</td>
+                        <td>금액</td>
+                        <td>신청 날짜</td>
+                        <td>승인 날짜</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for list in deposit_list %}
+                        <tr>
+                            <td class="{% if list.deposit_status == "pending" %}black {% elif list.deposit_status == "confirmed" %}green{% else %}red{% endif %}">
+                                {{ list.get_deposit_status_display }}
+                            </td>
+                            <td class="gray">{{ list.deposit_value|intcomma }}</td>
+                            <td>{{ list.created_at|date:"y-m-d H:i" }}</td>
+                            {% if list.confirmed_at %}
+                                <td>{{ list.confirmed_at|date:"y-m-d H:i" }}</td>
+                            {% else %}
+                                <td>승인 대기중</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock mypage_contents %}

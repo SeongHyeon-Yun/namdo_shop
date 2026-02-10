@@ -1,0 +1,8 @@
+.refund-area .title {
+    font-weight: bold;
+    border-bottom: 1px solid var(--color-border-color);
+}
+
+.refund-area .info-box {
+    padding: 10px 5px;
+}

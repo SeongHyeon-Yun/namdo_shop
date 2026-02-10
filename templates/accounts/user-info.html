@@ -1,0 +1,191 @@
+{% extends "config/base.html" %}
+{% load static %}
+{% block extend_css %}
+    <link rel="stylesheet" href="{% static "css/accounts/user-info.css" %}">
+{% endblock extend_css %}
+{% block contents %}
+    <div class="container user-info">
+        <h2>회원가입</h2>
+        <form method="post"
+              class="row g-3"
+              action="{% url "accounts:user_join" %}"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- 경고창 -->
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}<div class="alert alert-danger">{{ error }}</div>{% endfor %}
+            {% endif %}
+            {% for error in form.user_id.errors %}<div class="alert alert-danger">{{ error }}</div>{% endfor %}
+            <!-- 경고창 -->
+            <div class="col-md-12 user-border">사이트 이용정보 입력</div>
+            <div class="col-md-4">
+                <label for="inputId" class="form-label">아이디</label>
+                <input type="text"
+                       class="form-control"
+                       id="inputId"
+                       name="user_id"
+                       placeholder="아이디"
+                       required>
+            </div>
+            <div class="col-md-4">
+                <label for="password_1" class="form-label">비밀번호</label>
+                <input type="password"
+                       class="form-control"
+                       id="password_1"
+                       name="password_1"
+                       placeholder="비밀번호"
+                       required>
+            </div>
+            <div class="col-md-4">
+                <label for="password_2" class="form-label">비밀번호 확인</label>
+                <input type="password"
+                       class="form-control"
+                       id="password_2"
+                       name="password_2"
+                       placeholder="비밀번호 확인"
+                       required>
+            </div>
+            <div class="d-flex flex-row-reverse">
+                <div id="pw-msg"></div>
+            </div>
+            <div class="col-md-12 user-border">개인정보 입력</div>
+            <div class="col-md-4">
+                <label for="boss-name" class="form-label">대표자 명</label>
+                <input type="text"
+                       class="form-control"
+                       pattern="^[^A-Za-z]+$"
+                       id="boss-name"
+                       name="boss_name"
+                       placeholder="대표자 명"
+                       required>
+            </div>
+            <div class="col-md-4">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email"
+                       class="form-control"
+                       id="email"
+                       name="email"
+                       placeholder="이메일"
+                       required>
+            </div>
+            <div class="col-md-4">
+                <label for="phone" class="form-label">전화번호</label>
+                <input type="tel"
+                       class="form-control"
+                       id="phone"
+                       name="phone"
+                       placeholder="- 없이 입력하세요"
+                       inputmode="numeric"
+                       pattern="^0\d{9,10}$"
+                       maxlength="11"
+                       required>
+            </div>
+            <div class="col-md-6">
+                <label for="company-name" class="form-label">사업자 명</label>
+                <input type="text"
+                       class="form-control"
+                       pattern="^[^A-Za-z]+$"
+                       id="company-name"
+                       name="company_name"
+                       required
+                       placeholder="사업자 명">
+            </div>
+            <div class="col-md-6">
+                <label for="company-number" class="form-label">사업자 번호</label>
+                <input type="text"
+                       class="form-control"
+                       id="company-number"
+                       name="company_number"
+                       placeholder="- 없이 입력하세요"
+                       required>
+            </div>
+            <div class="col-md-6">
+                <label for="manager-name" class="form-label">담당자 명</label>
+                <input type="text"
+                       class="form-control"
+                       pattern="^[^A-Za-z]+$"
+                       id="manager-name"
+                       name="manager_name"
+                       placeholder="담당자 명"
+                       required>
+            </div>
+            <div class="col-md-6">
+                <label for="formFile" class="form-label">사업자 등록증 첨부</label>
+                <input class="form-control"
+                       type="file"
+                       id="business_file"
+                       name="business_file"
+                       accept=".jpg,.jpeg,.png,.pdf"
+                       required>
+            </div>
+            <div class="col-md-3">
+                <label for="post_code" class="form-label">우편번호</label>
+                <div class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           id="post_code"
+                           name="post_code"
+                           placeholder="우편 번호"
+                           required
+                           readonly>
+                    <button class="btn btn-dark" onclick="address_post_code()" type="button">주소 검색</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="address">주소</label>
+                <input type="text"
+                       class="form-control"
+                       id="address"
+                       name="address"
+                       placeholder="주소"
+                       required
+                       readonly>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="detail-address">상세 주소</label>
+                <input type="text"
+                       class="form-control"
+                       id="detail-address"
+                       name="detail_address"
+                       required
+                       placeholder="상세 주소">
+            </div>
+            <div class="col-md-3">
+                <label for="extraAddress" class="form-label">참고사항</label>
+                <input type="text"
+                       class="form-control"
+                       id="extraAddress"
+                       name="extraAddress">
+            </div>
+            <div class="col-md-12 user-border">정보 수신 동의</div>
+            <div class="col-md-12 d-flex">
+                <div class="check-box me-3">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           name="email_check"
+                           id="email_check">
+                    <label class="form-check-label" for="email_check">메일 수신 동의</label>
+                </div>
+                <div class="all-check-box">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           name="message_check"
+                           id="message_check">
+                    <label class="form-check-label" for="message_check">문자 수신 동의</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="d-grid gap-2 m-4 d-md-flex justify-content-md-center">
+                    <button type="submit" class="btn btn-primary btn-sm">회원가입</button>
+                    <a href="{% url "main:index" %}"
+                       type="button"
+                       class="btn btn-secondary btn-sm">취소</a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock contents %}
+{% block extend_js %}
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="{% static "js/accounts/user-info.js" %}"></script>
+{% endblock extend_js %}

@@ -1,0 +1,77 @@
+.join-area h2 {
+    font-weight: bold;
+    text-align: center;
+    padding: 30px 0 20px 0;
+}
+
+.join-area .join-box .title {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 15px 20px;
+    border: 1px solid var(--color-border-color);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: var(--color-bg-color);
+}
+
+.join-area .join-box .desc {
+    padding: 0 10px;
+    white-space: pre-line;
+    height: 350px;
+    overflow: auto;
+    font-size: 12px;
+    color: var(--color-text-color);
+    border-right: 1px solid var(--color-border-color);
+    border-left: 1px solid var(--color-border-color);
+    border-bottom: 1px solid var(--color-border-color);
+}
+
+.join-area .join-box .check-box {
+    border-right: 1px solid var(--color-border-color);
+    border-left: 1px solid var(--color-border-color);
+    border-bottom: 1px solid var(--color-border-color);
+    padding: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.join-area .join-box .user-info {
+    padding: 10px;
+    border-right: 1px solid var(--color-border-color);
+    border-left: 1px solid var(--color-border-color);
+    border-bottom: 1px solid var(--color-border-color);
+}
+
+.join-area .join-box .user-info table {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+}
+
+.join-area .join-box .user-info table thead {
+    color: #000;
+    font-weight: bold;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid var(--color-border-color);
+    background-color: var(--color-bg-color);
+}
+
+.join-area .join-box .user-info table thead tr td,
+.join-area .join-box .user-info table tbody tr td {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border-color);
+}
+
+.join-area .join-box .all-check-box {
+    background-color: var(--color-serve-color);
+    padding: 15px;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.join-area .join-box .join-btn {
+    display: block;
+    margin: auto;
+}

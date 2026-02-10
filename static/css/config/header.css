@@ -1,0 +1,70 @@
+header .top-menus {
+    display: flex;
+    justify-content: space-between;
+}
+
+header .top-menus .logo img {
+    height: 50px;
+}
+
+header .top-menus .user-info {
+    display: flex;
+    align-items: center;
+}
+
+header .top-menus .user-info .menu {
+    padding: 0 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: var(--color-text-color);
+}
+
+header .top-menus .user-info .menu:nth-child(4),
+header .top-menus .user-info .menu:nth-child(5) {
+    font-weight: 600;
+    color: #000;
+}
+
+header .top-menus .user-info .menu:hover {
+    border-bottom: 1px solid var(--color-border-color);
+}
+
+.hidden {
+    display: none;
+}
+
+.offcanvas-body .menu {
+    padding: 10px 0 !important;
+}
+
+header .bt-menus {
+    display: flex;
+}
+
+header .bt-menus .menu {
+    padding: 5px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+header .brown {
+    color: var(--color-serve-color);
+}
+
+.red {
+    color: red;
+}
+
+header .user-info-box {
+    border: 1px solid var(--color-border-color);
+    padding: 3px 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+header .user-info-box span {
+    padding: 0 5px;
+}
