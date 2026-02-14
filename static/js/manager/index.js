@@ -27,38 +27,27 @@ slider.addEventListener('mousemove', (e) => {
   slider.scrollLeft = scrollLeft - walk;
 });
 
-flatpickr("#dateRange", {
-  mode: "range",
-  dateFormat: "d M",     // 내부 포맷
-  locale: {
-    rangeSeparator: " – "
-  },
-  onChange: function (selectedDates) {
-    if (selectedDates.length === 2) {
-      const options = { day: "2-digit", month: "short" };
+// ---------------- 차트 ----------------
+const order_count_chart = document.getElementById('order_count');
 
-      const start = selectedDates[0].toLocaleDateString("en-GB", options);
-      const end = selectedDates[1].toLocaleDateString("en-GB", options);
-
-      document.getElementById("dateRange").value = `${start} – ${end}`;
-    }
-  }
-});
-
-
-const ctx = document.getElementById('myChart');
-
-new Chart(ctx, {
+new Chart(order_count_chart, {
   type: 'bar',
   data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['1', '2', '3', '4', '5', '6', "7"],
     datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
+      label: '#주문 건',
+      data: [12, 19, 3, 5, 2, 3, 10],
+      borderWidth: 1
+    },
+    {
+      label: '#취소 건',
+      data: [2, 1, 0, 1, 0, 1, 2],
       borderWidth: 1
     }]
   },
   options: {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true
@@ -66,3 +55,31 @@ new Chart(ctx, {
     }
   }
 });
+
+const order_value = document.getElementById('order_value');
+new Chart(order_value, {
+  type: 'line',
+  data: {
+    labels: ['1', '2', '3', '4', '5', '6', "7"],
+    datasets: [{
+      label: '#매출',
+      data: [12, 19, 3, 5, 2, 3, 10],
+      borderWidth: 1
+    },
+    {
+      label: '#환불',
+      data: [2, 3, 1, 1, 0, 2, 4],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+// ---------------- 차트 ----------------

@@ -1,58 +1,123 @@
 {% extends "manager/base.html" %}
 {% load static %}
 {% block extend_css %}
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="{% static "css/manager/index.css" %}">
 {% endblock extend_css %}
 {% block contents %}
-    <div class="index">
-        <div class="top-menus" id="top-menus">
-            <div class="menu">
-                <span>주문</span>
-                <span>0</span>
-                <span>건</span>
+    <div class="index-wrap">
+        <ul class="top-menus">
+            <a class="index-menu" href="#">
+                <li>
+                    <span>주문</span>
+                    <span>0</span>
+                    <span>건</span>
+                </li>
+            </a>
+            <a class="index-menu" href="">
+                <li>
+                    <span>주문취소</span>
+                    <span>0</span>
+                    <span>건</span>
+                </li>
+            </a>
+            <a class="index-menu" href="#">
+                <li>
+                    <span>미배송</span>
+                    <span>0</span>
+                    <span>건</span>
+                </li>
+            </a>
+            <a class="index-menu" href="#">
+                <li>
+                    <span>반품·환물</span>
+                    <span>0</span>
+                    <span>건</span>
+                </li>
+            </a>
+            <a class="index-menu" href="#">
+                <li>
+                    <span>신규가입</span>
+                    <span>0</span>
+                    <span>건</span>
+                </li>
+            </a>
+            <a class="index-menu" href="#">
+                <li>
+                    <span>예치금신청</span>
+                    <span>0</span>
+                    <span>건</span>
+                </li>
+            </a>
+            <a class="index-menu" href="#">
+                <li>
+                    <span>환급신청</span>
+                    <span>0</span>
+                    <span>건</span>
+                </li>
+            </a>
+        </ul>
+        <div class="index-con">
+            <div class="chart-area">
+                <div class="chart">
+                    <canvas id="order_count"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas id="order_value"></canvas>
+                </div>
             </div>
-            <div class="menu">
-                <span>주문 취소</span>
-                <span>0</span>
-                <span>건</span>
-            </div>
-            <div class="menu">
-                <span>미배송</span>
-                <span>0</span>
-                <span>건</span>
-            </div>
-            <div class="menu">
-                <span>반품요청</span>
-                <span>0</span>
-                <span>건</span>
-            </div>
-            <div class="menu">
-                <span>예치금 신청</span>
-                <span>0</span>
-                <span>건</span>
-            </div>
-            <div class="menu">
-                <span>환불 신청</span>
-                <span>0</span>
-                <span>건</span>
-            </div>
-            <div class="menu">
-                <span>신규 회원</span>
-                <span>0</span>
-                <span>건</span>
+            <div class="table-area">
+                <div class="table">
+                    <div class="title">
+                        <span>입금신청</span>
+                        <span>바로가기</span>
+                    </div>
+                    <div class="item-info">
+                        <table>
+                            <thead>
+                                <td>회사명</td>
+                                <td>입금자명</td>
+                                <td>입금액</td>
+                                <td>신청일시</td>
+                            </thead>
+                            <tbdoy>
+                            {% for i in count %}
+                                <tr>
+                                    <td>소프트코스트</td>
+                                    <td>윤성현</td>
+                                    <td>100,000</td>
+                                    <td>02-15 15:35:12</td>
+                                </tr>
+                            {% endfor %}
+                            </tbdoy>
+                        </table>
+                    </div>
+                </div>
+                <div class="table">
+                    <div class="title">
+                        <span>신규가입</span>
+                        <span>바로가기</span>
+                    </div>
+                    <div class="item-info">
+                        <table>
+                            <thead>
+                                <td>회사명</td>
+                                <td>가입일시</td>
+                            </thead>
+                            <tbdoy>
+                            {% for i in count %}
+                                <tr>
+                                    <td>소프트코스트</td>
+                                    <td>02-15 15:35:12</td>
+                                </tr>
+                            {% endfor %}
+                            </tbdoy>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="order_case">
-            <span>주문 건</span>
-            <input type="text" id="dateRange" class="form-control" placeholder="날짜 선택">
-            <div class="chart"></div>
-        </div>
-        <div class="order_value">주문 금액</div>
     </div>
 {% endblock contents %}
 {% block extend_js %}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{% static "js/manager/index.js" %}"></script>
 {% endblock extend_js %}
