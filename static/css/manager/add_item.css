@@ -1,0 +1,66 @@
+.add-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 500px;
+    height: 100vh;
+    z-index: 100;
+    background-color: #fff;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+}
+
+.title-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+.close-btn {
+    background-color: #256EF4;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.close-btn:hover {
+    background-color: #0156f3;
+    cursor: pointer;
+}
+
+.item-info {
+    width: 100%;
+    padding: 12px 24px;
+}
+
+.item-info .form-group {
+    width: 100%;
+}
+
+.item-info .krds-input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.item-info .krds-form-select {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.item-info .btn {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.ck-editor__editable {
+    height: 300px;
+    margin-bottom: 10px;
+}
+
+@media (max-width:500px) {
+    .add-item {
+        width: 400px;
+    }
+}

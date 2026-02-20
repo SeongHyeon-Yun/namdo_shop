@@ -1,0 +1,127 @@
+{% load static %}
+<link rel="stylesheet" href="{% static "css/manager/add_item.css" %}">
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<div id="add_area" class="add-item hidden">
+    <div class="title-area">
+        <h2>상품 등록하기</h2>
+        <span id="close-btn" class="close-btn">닫기</span>
+    </div>
+    <!-- 상품 정보 입력 -->
+    <form action="{% url "manager:create_item" %}" method="post">
+        {% csrf_token %}
+        <div class="item-info">
+            <div class="form-group">
+                <div class="form-tit">
+                    <label for="consult_name">상품 번호</label>
+                </div>
+                <div class="form-conts">
+                    <input type="text"
+                           id="consult_name"
+                           class="krds-input"
+                           name="item_num"
+                           placeholder="미입력시 자동 생성">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-tit">
+                    <label for="consult_name">상품 명</label>
+                </div>
+                <div class="form-conts">
+                    <input type="text"
+                           id="consult_name"
+                           class="krds-input"
+                           placeholder="상품 명"
+                           name="item_title"
+                           required>
+                </div>
+            </div>
+            <div class="form-tit">
+                <label for="consult_name">상품 설명</label>
+            </div>
+            <textarea id="editor"></textarea>
+            <div class="form-group">
+                <div class="form-tit">
+                    <label for="select_name">카테고리</label>
+                </div>
+                <div class="form-conts">
+                    <select id="select_name" name="item_cate" class="krds-form-select" title="선택">
+                        <option value="농산물">농산물</option>
+                        <option value="수산물">수산물</option>
+                        <option value="축산물">축산물</option>
+                        <option value="가공식품">가공식품</option>
+                        <option value="김치">김치</option>
+                        <option value="젓갈">젓갈</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-tit">
+                    <label for="select_name">세액</label>
+                </div>
+                <div class="form-conts">
+                    <select id="select_name" name="select_tex" class="krds-form-select" title="선택">
+                        <option value="과세">과세</option>
+                        <option value="면세">면세</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-tit">
+                    <label for="consult_name">상품 가격</label>
+                </div>
+                <div class="form-conts">
+                    <input type="text"
+                           id="consult_name"
+                           class="krds-input"
+                           placeholder="상품 가격"
+                           name="item_price"
+                           required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-tit">
+                    <label for="consult_name">원산지</label>
+                </div>
+                <div class="form-conts">
+                    <input type="text"
+                           id="consult_name"
+                           class="krds-input"
+                           placeholder="원산지"
+                           name="item_origin"
+                           required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-tit">
+                    <label for="consult_name">배송비</label>
+                </div>
+                <div class="form-conts">
+                    <input type="text"
+                           id="consult_name"
+                           class="krds-input"
+                           placeholder="배송비"
+                           name="delivery_1"
+                           required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-tit">
+                    <label for="consult_name">반품 배송비</label>
+                </div>
+                <div class="form-conts">
+                    <input type="text"
+                           id="consult_name"
+                           class="krds-input"
+                           placeholder="반품 배송비"
+                           name="delivery_2"
+                           required>
+                </div>
+            </div>
+            <div class="btn">
+                <button type="submit" class="krds-btn secondary">등록</button>
+            </div>
+        </div>
+    </form>
+    <!-- 상품 정보 입력 -->
+</div>

@@ -24,13 +24,6 @@
 
 /* -------------------------------------------- */
 
-.index-wrap {
-    margin: 0 auto;
-    min-width: 1248px;
-    width: 100px;
-    padding: 12px;
-}
-
 .index-wrap .top-menus {
     width: 100%;
     overflow-x: auto;
@@ -133,19 +126,6 @@
     text-align: center;
     border-bottom: 1px solid #e9e9e9;
     padding: 3px 0;
-}
-
-@media (max-width:1248px) {
-    .index-wrap {
-        min-width: 100%;
-    }
-}
-
-@media (max-width: 1024px) {
-    .index-wrap {
-        width: 100%;
-        padding: 12px;
-    }
 }
 
 @media (max-width: 500px) {

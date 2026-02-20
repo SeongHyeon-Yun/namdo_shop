@@ -4,9 +4,82 @@
     <link rel="stylesheet" href="{% static "css/manager/items.css" %}">
 {% endblock extend_css %}
 {% block contents %}
-    <div class="items-wrap">
-        asdasd
+    <div class="item-top-menu">
+        <h3>{{ title }}</h3>
+        <div>
+            <button>엑셀 다운로드</button>
+            <button id="item-add">+</button>
+        </div>
     </div>
+    <div class="krds-tab-area layer item-top">
+        <div class="tab line full tap-menu">
+            <ul role="tablist">
+                {% for value, label in tab %}
+                    <li role="tab" class="{% if current_status == value %}active{% endif %}">
+                        <a href="?status={{ value }}" class="btn-tab">{{ label }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="tab-conts-wrap">
+            <div class="search">
+                <select id="select_name4" class="krds-form-select completed" title="선택">
+                    <option value="" selected>상품명</option>
+                    <option value="">상품 번호</option>
+                </select>
+                <input type="text" id="consult_name" class="krds-input" placeholder="검색어 입력">
+                <button type="button" class="krds-btn">버튼</button>
+            </div>
+            <div class="krds-table-wrap">
+                <table class="tbl col data">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <input type="checkbox">
+                            </th>
+                            <th scope="col">상태</th>
+                            <th scope="col">상품번호</th>
+                            <th scope="col">상품명</th>
+                            <th scope="col">배송비</th>
+                            <th scope="col">상품등록일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in count %}
+                            <tr>
+                                <td class="row">
+                                    <input type="checkbox">
+                                </td>
+                                <td class="row">판매중</td>
+                                <td class="row">2131512</td>
+                                <td class="row">해남 고구마</td>
+                                <td class="row">3,000</td>
+                                <td class="row">2026-02-19</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="krds-pagination">
+        <span class="page-navi prev disabled" href="#">이전</span>
+        <div class="page-links">
+            <a class="page-link" href="#">1</a>
+            <a class="page-link" href="#">2</a>
+            <a class="page-link active" href="#">3</a>
+            <a class="page-link " href="#">4</a>
+            <a class="page-link" href="#">5</a>
+            <a class="page-link" href="#">6</a>
+            <a class="page-link" href="#">7</a>
+            <a class="page-link" href="#">8</a>
+            <span class="page-link link-dot"></span>
+            <a class="page-link" href="#">99</a>
+        </div>
+        <a class="page-navi next" href="#">다음</a>
+    </div>
+    {% include "manager/add_item.html" %}
+    {% include "manager/modal.html" %}
 {% endblock contents %}
 {% block extend_js %}
     <script src="{% static "js/manager/items.js" %}"></script>

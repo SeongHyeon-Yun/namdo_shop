@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.admin.views.decorators import staff_member_required
+from .utils import get_manager_item
+from items.forms import Item_form
 
 
 @never_cache
@@ -48,5 +50,27 @@ def logout_view(request):
 @staff_member_required(login_url="/manager/login")
 @login_required
 def items(request):
-    count = range(100)
-    return render(request, "manager/items.html", {"count": count})
+    status = request.GET.get("status", "ALL")
+
+    context = get_manager_item()
+    context["count"] = range(100)
+    context["current_status"] = status
+
+    return render(request, "manager/items.html", context)
+
+
+def create_item(request):
+    if request.method == "POST":
+        form = Item_form(request.POST, request.FILES)
+        print("is_valid:", form.is_valid())
+        print("errors:", form.errors)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request,"상품 등록이 완료 되었습니다.")
+            return redirect("manager:items")
+
+        else:
+            messages.error(request, "상품 번호가 중복됩니다.")
+            return redirect("manager:items")
+    # return render(request, "manager/create_item.html", {"form": form})

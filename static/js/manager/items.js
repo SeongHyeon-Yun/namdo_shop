@@ -1,26 +1,45 @@
-// 리스트 타입 버튼
-const item_list = document.getElementById("item-list");
-const item_grid = document.getElementById("item-grid");
+// 상품 추가하기 오프캔버스 열기
+const item_add_btn = document.getElementById('item-add');
+const add_area = document.getElementById('add_area');
+const close_btn = document.getElementById('close-btn');
 
-// 리스트 구역
-const items_table_area = document.getElementById('items-table-area');
-const items_img_area = document.getElementById('items-img-area');
-
-
-item_list.addEventListener('click', () => {
-    if (!item_list.classList.contains('icon-active')) {
-        item_grid.classList.remove('icon-active');
-        item_list.classList.add('icon-active');
-        items_img_area.classList.add("item-hidden");
-        items_table_area.classList.remove("item-hidden");
-    }
+item_add_btn.addEventListener("click", () => {
+    console.log('test');
+    console.log(add_area.classList.remove("hidden"));
 })
 
-item_grid.addEventListener('click', () => {
-    if (!item_grid.classList.contains('icon-active')) {
-        item_list.classList.remove('icon-active');
-        item_grid.classList.add('icon-active');
-        items_img_area.classList.remove("item-hidden");
-        items_table_area.classList.add("item-hidden");
-    }
+// 상품 추가하기 오프캔버스 닫기
+close_btn.addEventListener('click', () => {
+    console.log('close_test');
+    add_area.classList.add("hidden");
 })
+
+
+ClassicEditor
+    .create(document.querySelector('#editor'), {
+        toolbar: [
+            'bold',
+            'italic',
+            'link',
+            '|',
+            'bulletedList',
+            'numberedList',
+            '|',
+            'imageUpload',
+            '|',
+            'undo',
+            'redo'
+        ]
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+
+// 모달 닫기
+const modal_close_btn = document.getElementById("modal_close_btn");
+const modal_area = document.getElementById('modal_area')
+modal_close_btn.addEventListener("click", () => {
+    modal_area.remove()
+})
+

@@ -1,0 +1,12 @@
+{% load static %}
+<link rel="stylesheet" href="{% static "css/manager/modal.css" %}">
+{% if messages %}
+    {% for message in messages %}
+        <div id="modal_area" class="modal {{ message.tags }}">
+            <div>{{ message }}</div>
+            <div>
+                <button type="button" id="modal_close_btn" class="krds-btn xsmall secondary">닫기</button>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
