@@ -12,23 +12,24 @@
         <div class="item-info">
             <div class="form-group">
                 <div class="form-tit">
-                    <label for="consult_name">상품 번호</label>
+                    <label for="item_num">상품 번호</label>
                 </div>
                 <div class="form-conts">
                     <input type="text"
-                           id="consult_name"
+                           id="item_num"
                            class="krds-input"
                            name="item_num"
+                           oninput="onlyNumber(this)"
                            placeholder="미입력시 자동 생성">
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-tit">
-                    <label for="consult_name">상품 명</label>
+                    <label for="item_title">상품 명</label>
                 </div>
                 <div class="form-conts">
                     <input type="text"
-                           id="consult_name"
+                           id="item_title"
                            class="krds-input"
                            placeholder="상품 명"
                            name="item_title"
@@ -36,9 +37,9 @@
                 </div>
             </div>
             <div class="form-tit">
-                <label for="consult_name">상품 설명</label>
+                <label>상품 설명</label>
             </div>
-            <textarea id="editor"></textarea>
+            <textarea id="editor" name="description"></textarea>
             <div class="form-group">
                 <div class="form-tit">
                     <label for="select_name">카테고리</label>
@@ -57,10 +58,10 @@
             </div>
             <div class="form-group">
                 <div class="form-tit">
-                    <label for="select_name">세액</label>
+                    <label for="select_tex">세액</label>
                 </div>
                 <div class="form-conts">
-                    <select id="select_name" name="select_tex" class="krds-form-select" title="선택">
+                    <select id="select_tex" name="select_tex" class="krds-form-select" title="선택">
                         <option value="과세">과세</option>
                         <option value="면세">면세</option>
                     </select>
@@ -68,24 +69,25 @@
             </div>
             <div class="form-group">
                 <div class="form-tit">
-                    <label for="consult_name">상품 가격</label>
+                    <label for="item_price">상품 가격</label>
                 </div>
                 <div class="form-conts">
                     <input type="text"
-                           id="consult_name"
+                           id="item_price"
                            class="krds-input"
                            placeholder="상품 가격"
                            name="item_price"
+                           oninput="onlyPrice(this)"
                            required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-tit">
-                    <label for="consult_name">원산지</label>
+                    <label for="item_origin">원산지</label>
                 </div>
                 <div class="form-conts">
                     <input type="text"
-                           id="consult_name"
+                           id="item_origin"
                            class="krds-input"
                            placeholder="원산지"
                            name="item_origin"
@@ -94,27 +96,29 @@
             </div>
             <div class="form-group">
                 <div class="form-tit">
-                    <label for="consult_name">배송비</label>
+                    <label for="delivery_1">배송비</label>
                 </div>
                 <div class="form-conts">
                     <input type="text"
-                           id="consult_name"
+                           id="delivery_1"
                            class="krds-input"
                            placeholder="배송비"
                            name="delivery_1"
+                           oninput="onlyPrice(this)"
                            required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-tit">
-                    <label for="consult_name">반품 배송비</label>
+                    <label for="delivery_2">반품 배송비</label>
                 </div>
                 <div class="form-conts">
                     <input type="text"
-                           id="consult_name"
+                           id="delivery_2"
                            class="krds-input"
                            placeholder="반품 배송비"
                            name="delivery_2"
+                           oninput="onlyPrice(this)"
                            required>
                 </div>
             </div>

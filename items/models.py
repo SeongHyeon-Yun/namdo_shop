@@ -16,6 +16,12 @@ class Item(models.Model):
         ("면세", "면세"),
     ]
 
+    STATUS_CHOICES = [
+        ("stop", "중지"),
+        ("sale", "판매중"),
+    ]
+    
+    item_status = models.CharField(max_length=5, choices=STATUS_CHOICES, default="sale")
     item_num = models.CharField(max_length=50, unique=True, blank=True)
     item_title = models.CharField(max_length=150)
     item_desc = models.TextField(null=True, blank=True)
@@ -25,6 +31,9 @@ class Item(models.Model):
     item_origin = models.CharField(max_length=20)
     delivery_1 = models.PositiveIntegerField()
     delivery_2 = models.PositiveIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    description = models.TextField(blank=True)
 
     def save(self, *args, **kwargs):
         if not self.item_num:

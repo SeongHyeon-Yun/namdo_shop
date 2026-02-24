@@ -32,7 +32,7 @@ main {
 
 .nav-mobile .btn-area {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 .hidden {

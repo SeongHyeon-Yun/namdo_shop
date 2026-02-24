@@ -63,8 +63,8 @@
 
 .krds-table-wrap {
     margin-top: 10px;
-    min-height: 450px;
-    height: 450px;
+    max-height: 430px;
+    height: 100%;
     overflow: auto;
 }
 
@@ -83,6 +83,11 @@ input[type=checkbox] {
     font-size: 14px !important;
 }
 
+.krds-table-wrap table tbody tr:hover>td {
+    background-color: #f2f6ff !important;
+    cursor: pointer;
+}
+
 .krds-table-wrap table th:nth-child(1) {
     width: 5%;
 }
@@ -95,6 +100,20 @@ input[type=checkbox] {
 .krds-table-wrap table th:nth-child(5),
 .krds-table-wrap table th:nth-child(6) {
     width: 15%;
+}
+
+.del_btn {
+    margin-top: 5px;
+    background-color: #e53935;
+    padding: 3px 8px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.del_btn:active {
+    transform: translate(1px, 1px);
 }
 
 @media (max-width:500px) {

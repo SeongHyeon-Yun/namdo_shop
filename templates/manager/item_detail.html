@@ -1,0 +1,46 @@
+{% load static %}
+<link rel="stylesheet" href="{% static "css/manager/item_detail.css" %}">
+<div id="item_detail" class="hidden">
+    <div class="header">
+        <button id="item_detail_off">닫기</button>
+    </div>
+    <div class="contents">
+        <div class="sub_con left_con">
+            <div class="item_img">
+                <img src="{% static "images/manager/test.png" %}"
+                     alt="#"
+                     width=""
+                     height="">
+            </div>
+        </div>
+        <div class="sub_con right_con">
+            <h1 id="modal_title"></h1>
+            <div class="price_area">
+                <span>판매금액</span>
+                <span id="modal_price"></span>
+                <span>원</span>
+            </div>
+            <div class="sub_area">
+                <span>판매 상태</span>
+                <span id="status"></span>
+            </div>
+            <div class="sub_area">
+                <span>원산지</span>
+                <span id="origin"></span>
+            </div>
+            <div class="sub_area">
+                <span>기본 배송비</span>
+                <span id="item_delivery_1"></span>
+            </div>
+            <div class="sub_area">
+                <span>반품 배송비</span>
+                <span id="item_delivery_2"></span>
+            </div>
+            <div class="sub_area">
+                <span>과세 유형</span>
+                <span id="text"></span>
+            </div>
+        </div>
+    </div>
+    <div class="description" id="description"></div>
+</div>
