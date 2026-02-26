@@ -1,0 +1,50 @@
+.user-tab-area {
+    margin-top: 10px;
+    display: flex;
+}
+
+.user-tab-area li {
+    padding: 5px 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.user-tab-area li:hover {
+    background-color: #e9e9e9;
+}
+
+.user-tab-area li.active {
+    background-color: #e9e9e9;
+    border-bottom: 3px solid #3285f3;
+}
+
+.user-search-area {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.user-select {
+    width: 200px;
+}
+
+.user-table {
+    margin-top: 10px;
+    overflow: auto;
+    height: 500px;
+}
+
+.user-table table thead th,
+.user-table table tbody td {
+    text-align: center !important;
+    white-space: nowrap;
+}
+
+.user-table table thead th:nth-child(1) {
+    width: 50px;
+}
+
+.user-table table thead th:nth-child(even) {
+    background-color: #e9e9e9 !important;
+}

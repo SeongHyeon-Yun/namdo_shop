@@ -58,7 +58,6 @@
     height: 300px;
     margin-bottom: 10px;
 }
-
 @media (max-width:500px) {
     .add-item {
         width: 400px;

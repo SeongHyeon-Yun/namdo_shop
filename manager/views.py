@@ -7,7 +7,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.core.paginator import Paginator
 from .utils import get_manager_item
 from items.forms import Item_form
-from items.models import Item
+from items.models import Item, Thumnbnail
+from accounts.models import User
 from django.http import JsonResponse
 
 
@@ -87,21 +88,34 @@ def items(request):
     return render(request, "manager/items.html", context)
 
 
-# 상품 등록 기능
 def create_item(request):
     if request.method == "POST":
         form = Item_form(request.POST, request.FILES)
 
         if form.is_valid():
-            print(form.errors)
 
-            form.save()
-            messages.success(request, "상품 등록이 완료 되었습니다.")
+            # 1️⃣ 상품 먼저 저장
+            item = form.save()
+
+            # 2️⃣ 썸네일 여러 개 가져오기
+            images = request.FILES.getlist("images")
+
+            if not images:
+                messages.error(request, "썸네일 이미지를 1개 이상 등록해주세요.")
+                item.delete()
+                return redirect("manager:items")
+
+            # 3️⃣ 썸네일 저장
+            for idx, img in enumerate(images):
+                Thumnbnail.objects.create(
+                    item=item, image=img, is_main=True if idx == 0 else False
+                )
+
+            messages.success(request, "상품 등록이 완료되었습니다.")
             return redirect("manager:items")
 
         else:
-            print(form.item_status)
-            messages.error(request, "상품 번호가 중복됩니다.")
+            messages.error(request, "입력값을 확인해주세요.")
             return redirect("manager:items")
 
 
@@ -124,18 +138,54 @@ def delete_item(request):
 # 상품 디테일 창
 def item_detail(request, pk):
     item = Item.objects.get(pk=pk)
+    imgs = item.images.all()
 
-    print(item.delivery_1)
+    img_list = [i.image.url for i in imgs]
 
     return JsonResponse(
         {
             "title": item.item_title,
             "price": item.item_price,
             "origin": item.item_origin,
+            "tex": item.select_tex,
+            "status": item.get_item_status_display(),
+            "desc": item.description,
+            "img_list": img_list,
             "delivery_1": item.delivery_1,
             "delivery_2": item.delivery_2,
-            "text": item.select_tex,
-            "status": item.get_item_status_display(),
-            "description": item.description,
         }
+    )
+
+
+def user_list(request):
+
+    search_type = request.GET.get("search_type")
+    search = request.GET.get("search")
+
+    queryset = User.objects.filter(is_staff=False).order_by("-id")
+
+    # 🔍 검색 필터
+    if search and search_type:
+        if search_type == "company_name":
+            queryset = queryset.filter(company_name__icontains=search)
+
+        elif search_type == "manager_name":
+            queryset = queryset.filter(manager_name__icontains=search)
+
+        elif search_type == "company_number":
+            queryset = queryset.filter(company_number__icontains=search)
+
+    # 📄 페이지네이션
+    paginator = Paginator(queryset, 20)  # 한 페이지 10개
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(
+        request,
+        "manager/user.html",
+        {
+            "page_obj": page_obj,
+            "search": search,
+            "search_type": search_type,
+        },
     )

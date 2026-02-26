@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Item(models.Model):
     CATEGORY_CHOICES = [
         ("농산물", "농산물"),
@@ -20,7 +21,7 @@ class Item(models.Model):
         ("stop", "중지"),
         ("sale", "판매중"),
     ]
-    
+
     item_status = models.CharField(max_length=5, choices=STATUS_CHOICES, default="sale")
     item_num = models.CharField(max_length=50, unique=True, blank=True)
     item_title = models.CharField(max_length=150)
@@ -45,3 +46,15 @@ class Item(models.Model):
 
     def __str__(self):
         return self.item_title
+
+
+# 썸네일 모델
+class Thumnbnail(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name="images")
+
+    image = models.ImageField(upload_to="items/")
+
+    is_main = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.item.item_title} 이미지"

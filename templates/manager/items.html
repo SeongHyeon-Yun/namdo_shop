@@ -12,69 +12,67 @@
             <button id="item-add">+</button>
         </div>
     </div>
-    <div class="krds-tab-area layer item-top">
-        <div class="tab line full tap-menu">
-            <ul role="tablist">
-                {% for value, label in tab %}
-                    <li role="tab" class="{% if current_status == value %}active{% endif %}">
-                        <a href="{% querystring status=value %}" class="btn-tab">{{ label }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="tab-conts-wrap">
-            <form method="get">
-                <div class="search">
-                    <select name="search_type" class="krds-form-select">
-                        <option value="title"
-                                {% if request.GET.search_type == "title" %}selected{% endif %}>상품명</option>
-                        <option value="number"
-                                {% if request.GET.search_type == "number" %}selected{% endif %}>상품 번호</option>
-                    </select>
-                    <input type="text"
-                           id="consult_name"
-                           name="search"
-                           class="krds-input"
-                           value="{{ request.GET.search }}"
-                           placeholder="검색어 입력">
-                    <button type="submit" class="krds-btn">버튼</button>
-                </div>
-            </form>
-            <div class="krds-table-wrap">
-                <table class="tbl col data">
-                    <thead>
-                        <tr>
-                            <th scope="col">
-                                <input id="all-check" type="checkbox">
-                            </th>
-                            <th scope="col">상태</th>
-                            <th scope="col">상품번호</th>
-                            <th scope="col">상품명</th>
-                            <th scope="col">가격</th>
-                            <th scope="col">상품등록일</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <form method="post" action="{% url "manager:delete_item" %}">
-                            {% csrf_token %}
-                            {% for i in page %}
-                                <tr data-id="{{ i.id }}" class="item-row">
-                                    <td class="row">
-                                        <input name="item_ids" value="{{ i.id }}" class="item-check" type="checkbox">
-                                    </td>
-                                    <td class="row">{{ i.get_item_status_display }}</td>
-                                    <td class="row">{{ i.item_num }}</td>
-                                    <td class="row">{{ i.item_title }}</td>
-                                    <td class="row">{{ i.item_price|intcomma }}</td>
-                                    <td class="row">{{ i.created_at|date:"y-m-d H:i" }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                {% if page.paginator.count %}<button id="del_btn" class="del_btn">삭제</button>{% endif %}
-            </form>
-        </div>
+    <div>
+        <ul class="item_tab_menus">
+            {% for value, label in tab %}
+                <li role="tab" class="{% if current_status == value %}tab-active{% endif %}">
+                    <a href="{% querystring status=value %}" class="btn-tab">{{ label }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="tab-conts-wrap">
+        <form method="get">
+            <div class="search">
+                <select name="search_type" class="krds-form-select">
+                    <option value="title"
+                            {% if request.GET.search_type == "title" %}selected{% endif %}>상품명</option>
+                    <option value="number"
+                            {% if request.GET.search_type == "number" %}selected{% endif %}>상품 번호</option>
+                </select>
+                <input type="text"
+                       id="consult_name"
+                       name="search"
+                       class="krds-input"
+                       value="{{ request.GET.search }}"
+                       placeholder="검색어 입력">
+                <button type="submit" class="krds-btn">버튼</button>
+            </div>
+        </form>
+        <div class="krds-table-wrap">
+            <table class="tbl col data">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <input id="all-check" type="checkbox">
+                        </th>
+                        <th scope="col">상태</th>
+                        <th scope="col">상품번호</th>
+                        <th scope="col">상품명</th>
+                        <th scope="col">가격</th>
+                        <th scope="col">상품등록일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form method="post" action="{% url "manager:delete_item" %}">
+                        {% csrf_token %}
+                        {% for i in page %}
+                            <tr data-id="{{ i.id }}" class="item-row">
+                                <td class="row">
+                                    <input name="item_ids" value="{{ i.id }}" class="item-check" type="checkbox">
+                                </td>
+                                <td class="row">{{ i.get_item_status_display }}</td>
+                                <td class="row">{{ i.item_num }}</td>
+                                <td class="row">{{ i.item_title }}</td>
+                                <td class="row">{{ i.item_price|intcomma }}</td>
+                                <td class="row">{{ i.created_at|date:"y-m-d H:i" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if page.paginator.count %}<button id="del_btn" class="del_btn">삭제</button>{% endif %}
+        </form>
     </div>
     <div class="krds-pagination">
         {# 이전 버튼 #}

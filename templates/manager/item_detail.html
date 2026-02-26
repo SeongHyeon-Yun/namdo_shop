@@ -2,45 +2,45 @@
 <link rel="stylesheet" href="{% static "css/manager/item_detail.css" %}">
 <div id="item_detail" class="hidden">
     <div class="header">
-        <button id="item_detail_off">닫기</button>
+        <i class="svg-icon ico-popup-close" id="item_detail_off"></i>
     </div>
-    <div class="contents">
-        <div class="sub_con left_con">
-            <div class="item_img">
-                <img src="{% static "images/manager/test.png" %}"
-                     alt="#"
-                     width=""
-                     height="">
+    <div class="item_header">
+        <div class="carousel">
+            <div class="carousel_img" id="carousel_wrapper">
+                <div class="img">123</div>
+            </div>
+            <div class="carousel_btn">
+                <div class="nav-btn" id="previous_btn">&lt;</div>
+                <div class="indicator">
+                    <span id="current">1</span> / <span id="total"></span>
+                </div>
+                <div class="nav-btn" id="next-btn">&gt;</div>
             </div>
         </div>
-        <div class="sub_con right_con">
+        <div class="item_info">
+            <div>
+                <span class="krds-badge bg-light-primary" id="status"></span>
+                <span class="krds-badge bg-light-success" id="tex"></span>
+                <span class="krds-badge bg-light-gray" id="origin"></span>
+            </div>
             <h1 id="modal_title"></h1>
-            <div class="price_area">
-                <span>판매금액</span>
-                <span id="modal_price"></span>
-                <span>원</span>
-            </div>
-            <div class="sub_area">
-                <span>판매 상태</span>
-                <span id="status"></span>
-            </div>
-            <div class="sub_area">
-                <span>원산지</span>
-                <span id="origin"></span>
-            </div>
-            <div class="sub_area">
-                <span>기본 배송비</span>
-                <span id="item_delivery_1"></span>
-            </div>
-            <div class="sub_area">
-                <span>반품 배송비</span>
-                <span id="item_delivery_2"></span>
-            </div>
-            <div class="sub_area">
-                <span>과세 유형</span>
-                <span id="text"></span>
-            </div>
         </div>
+        <div class="item_info">
+            <span class="sub_title">판매가격</span>
+            <span id="modal_price"></span>
+            <span>원</span>
+        </div>
+        <div class="item_info">
+            <span class="sub_title">기본 배송비</span>
+            <span id="item_delivery_1"></span>
+            <span>원</span>
+        </div>
+        <div class="item_info">
+            <span class="sub_title">반품·교환 배송비</span>
+            <span id="item_delivery_2"></span>
+            <span>원</span>
+        </div>
+        <h2>상품 상세 설명</h2>
+        <div id="description"></div>
     </div>
-    <div class="description" id="description"></div>
 </div>

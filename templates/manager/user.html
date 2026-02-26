@@ -1,0 +1,86 @@
+{% extends "manager/base.html" %}
+{% load static %}
+{% block extend_css %}
+    <link rel="stylesheet" href="{% static "css/manager/user.css" %}">
+{% endblock extend_css %}
+{% block contents %}
+    <h3>회원관리</h3>
+    <ul class="user-tab-area">
+        <li class="active">ALL</li>
+        <li>정상</li>
+        <li>정지</li>
+    </ul>
+    <form method="get">
+        <div class="user-search-area">
+            <div class="form-group user-select">
+                <div class="form-conts">
+                    <select name="search_type" class="krds-form-select small" title="선택">
+                        <option value="company_name" selected>사업자명</option>
+                        <option value="manager_name">담당자명</option>
+                        <option value="company_number">사업자 번호</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-conts">
+                    <input type="text"
+                           name="search"
+                           class="krds-input small"
+                           placeholder="검색어 입력">
+                </div>
+            </div>
+            <button type="submit" class="krds-btn small">검색</button>
+        </div>
+    </form>
+    <div class="krds-table-wrap user-table">
+        <table class="tbl col data">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">대표자</th>
+                    <th scope="col">사업자</th>
+                    <th scope="col">사업자 번호</th>
+                    <th scope="col">담당자</th>
+                    <th scope="col">전화번호</th>
+                    <th scope="col">주소</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">마지막 접속</th>
+                    <th scope="col">사업자등록증</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in page_obj %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ user.boss_name }}</td>
+                        <td>{{ user.company_name }}</td>
+                        <td>{{ user.company_number }}</td>
+                        <td>{{ user.manager_name }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.address }} {{ user.detail_address }} {{ user.extraAddress }} {{ user.post_code }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.last_login|date:"y-m-d H:i" }}</td>
+                        <td>
+                            <a href="{{ user.business_file.url }}" download class="krds-btn xsmall">사업자등록증 다운</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- pagination -->
+    <div class="krds-pagination">
+        {% if page_obj.has_previous %}
+            <a class="page-navi prev"
+               href="?page={{ page_obj.previous_page_number }}">이전</a>
+        {% endif %}
+        <div class="page-links">
+            {% for num in page_obj.paginator.page_range %}
+                <a class="page-link {% if page_obj.number == num %}active{% endif %}"
+                   href="?page={{ num }}">{{ num }}</a>
+            {% endfor %}
+        </div>
+        {% if page_obj.has_next %}<a class="page-navi next" href="?page={{ page_obj.next_page_number }}">다음</a>{% endif %}
+    </div>
+    <!-- //pagination -->
+{% endblock contents %}

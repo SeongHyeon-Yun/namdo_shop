@@ -116,6 +116,85 @@ input[type=checkbox] {
     transform: translate(1px, 1px);
 }
 
+.item_tab_menus {
+    display: flex;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.item_tab_menus li {
+    width: 80px;
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 2px solid #000;
+    font-weight: 500;
+    color: #053361;
+}
+
+.tab-active {
+    font-weight: bold !important;
+    color: #000000 !important;
+    background-color: #e9e9e9;
+}
+
+/* 썸네일 정렬 */
+.upload-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 0;
+}
+
+.thumb-item {
+    list-style: none;
+}
+
+/* 카드 영역 */
+.thumb-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.thumb-wrapper:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* 이미지 */
+.thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 삭제 버튼 */
+.thumb-delete {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.thumb-delete:hover {
+    background: #ff3b3b;
+}
+
+
 @media (max-width:500px) {
     .search {
         width: 100%;

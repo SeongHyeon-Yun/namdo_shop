@@ -7,7 +7,9 @@
         <span id="close-btn" class="close-btn">닫기</span>
     </div>
     <!-- 상품 정보 입력 -->
-    <form action="{% url "manager:create_item" %}" method="post">
+    <form action="{% url "manager:create_item" %}"
+          method="post"
+          enctype="multipart/form-data">
         {% csrf_token %}
         <div class="item-info">
             <div class="form-group">
@@ -36,6 +38,41 @@
                            required>
                 </div>
             </div>
+            <!-- file upload -->
+            <div class="krds-file-upload line">
+                <!-- 상단 -->
+                <div class="file-head">
+                    <h3 class="tit">썸네일</h3>
+                    <p>상품 썸네일 이미지는 1개이상 등록해주세요. (최대 5개)</p>
+                </div>
+                <!-- 업로드 영역 -->
+                <div class="file-upload" id="drop-area">
+                    <p class="txt">이미지를 드래그하거나 파일선택 버튼을 눌러주세요.</p>
+                    <div class="file-upload-btn-wrap">
+                        <input type="file"
+                               name="images"
+                               id="file-upload"
+                               accept="image/*"
+                               name="images"
+                               multiple
+                               required>
+                        <label for="file-upload" class="krds-btn medium">파일선택</label>
+                    </div>
+                </div>
+                <!-- 썸네일 리스트 -->
+                <div class="file-list">
+                    <div class="total">
+                        <span class="current">0개</span> / 5개
+                    </div>
+                    <ul class="upload-list" id="preview-list">
+                        <!-- JS로 썸네일 생성 -->
+                    </ul>
+                    <div class="upload-delete-btn">
+                        <button type="button" class="krds-btn xsmall tertiary" id="delete-all">전체 삭제</button>
+                    </div>
+                </div>
+            </div>
+            <!-- //file upload -->
             <div class="form-tit">
                 <label>상품 설명</label>
             </div>
