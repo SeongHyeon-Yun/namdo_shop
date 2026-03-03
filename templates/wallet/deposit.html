@@ -5,15 +5,23 @@
     <link rel="stylesheet" href="{% static "css/wallet/deposit.css" %}">
 {% endblock extend_css %}
 {% block mypage_contents %}
+    {% for msg in form.deposit_value.errors %}
+        <div class="msg_modal">
+            {% if msg %}{{ msg }}{% endif %}
+            <div>
+                <button id="msg_btn">닫기</button>
+            </div>
+        </div>
+    {% endfor %}
     <div class="deposit-area">
-        <form method="post">
+        <form method="post" action="{% url "wallet:deposit_appliction" %}">
             {% csrf_token %}
             <div class="title">예치금 충전</div>
             <div class="form-floating mt-3 mb-3">
                 <input type="text"
                        class="form-control"
                        id="depoist_money"
-                       name="depoist_money"
+                       name="deposit_value"
                        placeholder="money"
                        oninput="only_number(this)"
                        required>
@@ -36,7 +44,7 @@
                 <input type="text"
                        class="form-control"
                        id="user_input"
-                       name="user_input"
+                       name="deposit_name"
                        placeholder="입금자 명"
                        required>
                 <label for="user_input">입금자 명</label>

@@ -1,0 +1,217 @@
+{% extends "manager/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block extend_css %}
+    <link rel="stylesheet" href="{% static "css/manager/user.css" %}">
+{% endblock extend_css %}
+{% block contents %}
+    <h3>예금관리</h3>
+    <form method="get">
+        <ul class="user-tab-area">
+            <li class="{% if status == 'deposit_pending' %}active{% endif %}">
+                <a href="?status=deposit_pending">입금 신청</a>
+            </li>
+            <li class="{% if status == 'deposit_confirmed' %}active{% endif %}">
+                <a href="?status=deposit_confirmed">입금 승인</a>
+            </li>
+            <li class="{% if status == 'deposit_rejected' %}active{% endif %}">
+                <a href="?status=deposit_rejected">입금 반려</a>
+            </li>
+            <li class="{% if status == 'refund_pending' %}active{% endif %}">
+                <a href="?status=refund_pending">환불 신청</a>
+            </li>
+            <li class="{% if status == 'refund_confirmed' %}active{% endif %}">
+                <a href="?status=refund_confirmed">환불 승인</a>
+            </li>
+            <li class="{% if status == 'refund_rejected' %}active{% endif %}">
+                <a href="?status=refund_rejected">환불 반려</a>
+            </li>
+        </ul>
+    </form>
+    <form method="get">
+        <div class="user-search-area">
+            <div class="form-group user-select">
+                <div class="form-conts">
+                    <select name="search_type" class="krds-form-select small" title="선택">
+                        <option value="company_name" selected>업체 명</option>
+                        <option value="manager_name">입금자 명</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-conts">
+                    <input type="text"
+                           name="search"
+                           class="krds-input small"
+                           placeholder="검색어 입력">
+                </div>
+            </div>
+            <button type="submit" class="krds-btn small">검색</button>
+        </div>
+    </form>
+    <div class="krds-table-wrap user-table">
+        <table class="tbl col data">
+            <thead>
+                <tr>
+                    {% if status == 'deposit_pending' %}
+                        <th scope="col">No</th>
+                        <th scope="col">업체 명</th>
+                        <th scope="col">신청 금액</th>
+                        <th scope="col">입금자 명</th>
+                        <th scope="col">신청 시간</th>
+                        <th scope="col">여부</th>
+                    {% elif status == 'deposit_confirmed' %}
+                        <th scope="col">No</th>
+                        <th scope="col">업체 명</th>
+                        <th scope="col">신청 금액</th>
+                        <th scope="col">입금자 명</th>
+                        <th scope="col">신청 시간</th>
+                        <th scope="col">처리 시간</th>
+                    {% elif status == 'deposit_rejected' %}
+                        <th scope="col">No</th>
+                        <th scope="col">업체 명</th>
+                        <th scope="col">신청 금액</th>
+                        <th scope="col">입금자 명</th>
+                        <th scope="col">신청 시간</th>
+                        <th scope="col">처리 시간</th>
+                    {% elif status == 'refund_pending' %}
+                        <th scope="col">No</th>
+                        <th scope="col">업체 명</th>
+                        <th scope="col">은행명</th>
+                        <th scope="col">계좌번호</th>
+                        <th scope="col">신청 금액</th>
+                        <th scope="col">입금자 명</th>
+                        <th scope="col">신청 시간</th>
+                        <th scope="col">여부</th>
+                    {% elif status == 'refund_confirmed' %}
+                        <th scope="col">No</th>
+                        <th scope="col">업체 명</th>
+                        <th scope="col">은행명</th>
+                        <th scope="col">계좌번호</th>
+                        <th scope="col">신청 금액</th>
+                        <th scope="col">입금자 명</th>
+                        <th scope="col">신청 시간</th>
+                        <th scope="col">처리 시간</th>
+                    {% elif status == 'refund_rejected' %}
+                        <th scope="col">No</th>
+                        <th scope="col">업체 명</th>
+                        <th scope="col">은행명</th>
+                        <th scope="col">계좌번호</th>
+                        <th scope="col">신청 금액</th>
+                        <th scope="col">입금자 명</th>
+                        <th scope="col">신청 시간</th>
+                        <th scope="col">처리 시간</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% if status == 'deposit_pending' %}
+                    {% for list in wallet_list %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ list.company_name }}</td>
+                                <td>{{ list.deposit_value|intcomma }}</td>
+                                <td>{{ list.deposit_name }}</td>
+                                <td>{{ list.created_at|date:"m-d H:i" }}</td>
+                                <td>
+                                    <input type="hidden" name="deposit_id" value="{{ list.id }}">
+                                    <button type="submit"
+                                            name="action"
+                                            value="deposit_approve"
+                                            class="krds-btn xsmall">승인</button>
+                                    <button type="submit"
+                                            name="action"
+                                            value="deposit_reject"
+                                            class="krds-btn tertiary xsmall">거절</button>
+                                </td>
+                            </tr>
+                        </form>
+                    {% empty %}
+                        <tr>
+                            <td colspan="8">데이터가 없습니다.</td>
+                        </tr>
+                    {% endfor %}
+                {% elif status == 'deposit_confirmed' %}
+                    {% for list in wallet_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ list.company_name }}</td>
+                            <td>{{ list.deposit_value|intcomma }}</td>
+                            <td>{{ list.deposit_name }}</td>
+                            <td>{{ list.created_at|date:"m-d H:i" }}</td>
+                            <td>{{ list.confirmed_at|date:"m-d H:i" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="8">데이터가 없습니다.</td>
+                        </tr>
+                    {% endfor %}
+                {% elif status == 'deposit_rejected' %}
+                    {% for list in wallet_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ list.company_name }}</td>
+                            <td>{{ list.deposit_value|intcomma }}</td>
+                            <td>{{ list.deposit_name }}</td>
+                            <td>{{ list.created_at|date:"m-d H:i" }}</td>
+                            <td>{{ list.confirmed_at|date:"m-d H:i" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="8">데이터가 없습니다.</td>
+                        </tr>
+                    {% endfor %}
+                {% elif status == 'refund_pending' %}
+                    {% for list in wallet_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ list.user.company_name }}</td>
+                            <td>{{ list.bank }}</td>
+                            <td>{{ list.bank_num }}</td>
+                            <td>{{ list.refund_value|intcomma }}</td>
+                            <td>{{ list.user_name }}</td>
+                            <td>{{ list.created_at|date:"m-d H:i" }}</td>
+                            <td>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="deposit_id" value="{{ list.id }}">
+                                    <button type="submit" name="action" value="refund_approve" class="krds-btn xsmall">승인</button>
+                                    <button type="submit" name="action" value="refund_reject" class="krds-btn tertiary xsmall">거절</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% elif status == 'refund_confirmed' %}
+                    {% for list in wallet_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ list.user.company_name }}</td>
+                            <td>{{ list.bank }}</td>
+                            <td>{{ list.bank_num }}</td>
+                            <td>{{ list.refund_value|intcomma }}</td>
+                            <td>{{ list.user_name }}</td>
+                            <td>{{ list.created_at|date:"m-d H:i" }}</td>
+                            <td>{{ list.confirmed_at|date:"m-d H:i" }}</td>
+                        </tr>
+                    {% endfor %}
+                {% elif status == 'refund_rejected' %}
+                    {% for list in wallet_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ list.user.company_name }}</td>
+                            <td>{{ list.bank }}</td>
+                            <td>{{ list.bank_num }}</td>
+                            <td>{{ list.refund_value|intcomma }}</td>
+                            <td>{{ list.user_name }}</td>
+                            <td>{{ list.created_at|date:"m-d H:i" }}</td>
+                            <td>{{ list.confirmed_at|date:"m-d H:i" }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    {% include "manager/modal.html" %}
+{% endblock contents %}

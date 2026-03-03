@@ -22,6 +22,10 @@
     background-color: #0d6efd;
 }
 
+.modal.warning {
+    background-color: #F59E0B;
+}
+
 .modal.error {
     background-color: #e25f6c;
 }

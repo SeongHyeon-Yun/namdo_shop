@@ -61,10 +61,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="gnb-main-trigger is-link" data-trigger="gnb">
+                                <a href="{% url "manager:deposit_page" %}" class="gnb-main-trigger is-link" data-trigger="gnb">
                                     <span>예치금관리</span>
                                     <div class="krds-badge-wrap">
-                                        <span class="krds-badge bg-point number">5</span>
+                                        <span class="krds-badge bg-point number">
+                                            {{ item_count }}
+                                        </span>
                                     </div>
                                 </a>
                             </li>
@@ -98,10 +100,10 @@
                         <a href="#" class="gnb-main-trigger is-link" data-trigger="gnb">배송관리</a>
                     </li>
                     <li class="menu">
-                        <a href="#" class="gnb-main-trigger is-link" data-trigger="gnb">예치금관리</a>
+                        <a href="{% url "manager:deposit_page" %}" class="gnb-main-trigger is-link" data-trigger="gnb">예치금관리</a>
                     </li>
                     <li class="menu">
-                        <a href="#" class="gnb-main-trigger is-link" data-trigger="gnb">회원관리</a>
+                        <a href="{% url "manager:user_list" %}" class="gnb-main-trigger is-link" data-trigger="gnb">회원관리</a>
                     </li>
                 </ul>
             </div>

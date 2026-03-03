@@ -20,3 +20,12 @@ function only_korea() {
     var pattern = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
     this.value = this.value.replace(pattern, '');
 }
+
+
+const msg_btn = document.getElementById("msg_btn")
+const msg_modal = document.querySelectorAll(".msg_modal")
+msg_btn.addEventListener("click", () => {
+    msg_modal.forEach(e => {
+        e.classList.add("hidden")
+    });
+})

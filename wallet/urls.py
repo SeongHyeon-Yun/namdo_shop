@@ -8,4 +8,5 @@ urlpatterns = [
     path("use_list/", views.use_list, name="use_list"),
     path("refund/", views.refund, name="refund"),
     path("refund_list/", views.refund_list, name="refund_list"),
+    path("deposit_application/", views.deposit_fun, name="deposit_appliction"),
 ]

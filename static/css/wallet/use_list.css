@@ -28,7 +28,8 @@
     height: 250px;
     overflow: auto;
 }
-.use-list .list-item .table thead{
+
+.use-list .list-item .table thead {
     font-size: 14px;
     font-weight: bold;
 }
@@ -55,4 +56,33 @@
 .use-list .list-item .table .red {
     color: red;
     font-weight: bold;
+}
+
+.msg_modal {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1E90FF;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    border: 1px solid;
+    text-align: center;
+    padding: 30px 50px;
+    border-radius: 10px;
+}
+
+.msg_modal button {
+    margin-top: 10px;
+    border: none;
+    border-radius: 3px;
+    padding: 3px 8px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.msg_modal button:active {
+    background-color: #e7e7e7;
 }

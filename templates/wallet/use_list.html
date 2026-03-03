@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="{% static "css/wallet/use_list.css" %}">
 {% endblock extend_css %}
 {% block mypage_contents %}
+    {% for msg in messages %}
+        <div class="msg_modal">
+            {% if msg %}{{ msg }}{% endif %}
+            <div>
+                <button id="msg_btn">닫기</button>
+            </div>
+        </div>
+    {% endfor %}
     <div class="use-list">
         <div class="title">예치금 사용내역</div>
         <div class="input-group mt-3">
@@ -45,3 +53,6 @@
         </div>
     </div>
 {% endblock mypage_contents %}
+{% block extend_js %}
+    <script src="{% static "js/wallet/use_list.js" %}"></script>
+{% endblock extend_js %}

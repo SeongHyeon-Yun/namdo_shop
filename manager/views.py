@@ -9,7 +9,12 @@ from .utils import get_manager_item
 from items.forms import Item_form
 from items.models import Item, Thumnbnail
 from accounts.models import User
+from wallet.models import Deposit, Wallet, Refund
 from django.http import JsonResponse
+from django.core.files.storage import default_storage
+from django.utils import timezone
+from django.urls import reverse
+from django.db import transaction
 
 
 @never_cache
@@ -57,6 +62,7 @@ def items(request):
     status = request.GET.get("status", "ALL")
     search = request.GET.get("search", "")
     search_type = request.GET.get("search_type", "title")
+    form = Item_form()
 
     queryset = Item.objects.all()
 
@@ -78,16 +84,15 @@ def items(request):
 
     context = get_manager_item()
     context.update(
-        {
-            "current_status": status,
-            "search": search,
-            "page": page_obj,
-        }
+        {"current_status": status, "search": search, "page": page_obj, "form": form}
     )
 
     return render(request, "manager/items.html", context)
 
 
+@never_cache
+@staff_member_required(login_url="/manager/login")
+@login_required
 def create_item(request):
     if request.method == "POST":
         form = Item_form(request.POST, request.FILES)
@@ -120,6 +125,9 @@ def create_item(request):
 
 
 # 등록된 상품 삭제 기능
+@never_cache
+@staff_member_required(login_url="/manager/login")
+@login_required
 def delete_item(request):
     if request.method == "POST":
         ids = request.POST.getlist("item_ids")
@@ -136,6 +144,9 @@ def delete_item(request):
 
 
 # 상품 디테일 창
+@never_cache
+@staff_member_required(login_url="/manager/login")
+@login_required
 def item_detail(request, pk):
     item = Item.objects.get(pk=pk)
     imgs = item.images.all()
@@ -157,6 +168,19 @@ def item_detail(request, pk):
     )
 
 
+# 상품 설명 이미지 업로드
+def upload(request):
+    if request.method == "POST" and request.FILES.get("upload"):
+        file = request.FILES["upload"]
+        path = default_storage.save(f"editor/{file.name}", file)
+        file_url = default_storage.url(path)
+
+        return JsonResponse({"url": file_url})
+
+    return JsonResponse({"error": "업로드 실패"}, status=400)
+
+
+# 유저 관리
 def user_list(request):
 
     search_type = request.GET.get("search_type")
@@ -189,3 +213,107 @@ def user_list(request):
             "search_type": search_type,
         },
     )
+
+
+# 예치금 관리자 페이지
+@never_cache
+@staff_member_required(login_url="/manager/login")
+@login_required
+def deposit_page(request):
+    now = timezone.now()
+    status = request.GET.get("status", "deposit_pending")
+
+    context = {"status": status}
+
+    # ----------------------------
+    # GET 데이터 처리 (목록 출력)
+    # ----------------------------
+    type_prefix, current_status = status.split("_")
+
+    if type_prefix == "deposit":
+        wallet_list = Deposit.objects.select_related("user").filter(
+            deposit_status=current_status
+        )
+    else:
+        wallet_list = Refund.objects.select_related("user").filter(
+            refund_status=current_status
+        )
+
+    context.update({"wallet_list": wallet_list})
+
+    # ----------------------------
+    # POST 처리
+    # ----------------------------
+    if request.method == "POST":
+        action = request.POST.get("action")
+        object_id = request.POST.get("deposit_id")
+
+        if not action or not object_id:
+            messages.error(request, "잘못된 요청입니다.")
+            return redirect(reverse("manager:deposit_page") + f"?status={status}")
+
+        # ============================
+        # 예치금 처리
+        # ============================
+        if action.startswith("deposit"):
+
+            with transaction.atomic():
+                deposit = Deposit.objects.select_for_update().get(id=object_id)
+
+                if deposit.is_applied:
+                    messages.warning(request, "이미 처리된 건입니다.")
+                    return redirect(
+                        reverse("manager:deposit_page") + f"?status={status}"
+                    )
+
+                wallet = deposit.user.wallet
+
+                if action == "deposit_approve":
+                    wallet.balance += deposit.deposit_value
+                    deposit.deposit_status = "confirmed"
+                    messages.success(request, "입금 승인 완료되었습니다.")
+
+                elif action == "deposit_reject":
+                    deposit.deposit_status = "rejected"
+                    messages.error(request, "입금 신청이 거절되었습니다.")
+
+                deposit.is_applied = True
+                deposit.confirmed_at = now
+
+                wallet.save()
+                deposit.save()
+
+        # ============================
+        # 환불 처리
+        # ============================
+        elif action.startswith("refund"):
+
+            with transaction.atomic():
+                refund = Refund.objects.select_for_update().get(id=object_id)
+
+                if refund.is_applied:
+                    messages.warning(request, "이미 처리된 건입니다.")
+                    return redirect(
+                        reverse("manager:deposit_page") + f"?status={status}"
+                    )
+
+                wallet = refund.user.wallet
+
+                if action == "refund_approve":
+                    refund.refund_status = "confirmed"
+                    messages.success(request, "환불 신청이 완료되었습니다.")
+
+                elif action == "refund_reject":
+                    wallet.balance += refund.refund_value
+                    refund.refund_status = "rejected"
+                    messages.error(request, "환불 신청이 거절되었습니다.")
+
+                refund.is_applied = True
+                refund.confirmed_at = now
+
+                wallet.save()
+                refund.save()
+
+        return redirect(reverse("manager:deposit_page") + f"?status={status}")
+
+    return render(request, "manager/deposit.html", context)

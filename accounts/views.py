@@ -6,6 +6,7 @@ from django.http import FileResponse
 from django.conf import settings
 from .forms import join_form, ExcelUploadForm
 from .models import User
+from wallet.models import Wallet
 import os
 
 
@@ -49,7 +50,8 @@ def user_join(request):
             password = data.pop("password_1")
             data.pop("password_2")
 
-            User.objects.create_user(password=password, **data)
+            user = User.objects.create_user(password=password, **data)
+            Wallet.objects.create(user=user)
 
             messages.success(request, "회원가입이 완료 되었습니다.")
             return redirect("accounts:login")

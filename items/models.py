@@ -1,5 +1,5 @@
 from django.db import models
-
+from django_ckeditor_5.fields import CKEditor5Field
 
 class Item(models.Model):
     CATEGORY_CHOICES = [
@@ -34,7 +34,7 @@ class Item(models.Model):
     delivery_2 = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
-    description = models.TextField(blank=True)
+    description = CKEditor5Field("상품 설명", config_name="default")
 
     def save(self, *args, **kwargs):
         if not self.item_num:

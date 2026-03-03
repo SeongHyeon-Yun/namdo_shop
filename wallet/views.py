@@ -3,20 +3,23 @@ from django.db import transaction
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Deposit, Refund, Wallet
+from .forms import DepositForm
 
 
-# Create your views here.
+# 충전 화면
 @login_required
 def deposit(request):
     return render(request, "wallet/deposit.html")
 
 
+# 사용 내역
 @login_required
 def use_list(request):
     deposit_list = Deposit.objects.filter(user=request.user)
     return render(request, "wallet/use_list.html", {"deposit_list": deposit_list})
 
 
+# 환불 신청
 @login_required
 def refund(request):
     if request.method == "POST":
@@ -57,8 +60,32 @@ def refund(request):
     return render(request, "wallet/refund.html")
 
 
+# 환급 내역
 @login_required
 def refund_list(request):
     row_refund = Refund.objects.filter(user=request.user)
 
     return render(request, "wallet/refund_list.html", {"row_refund": row_refund})
+
+
+def deposit_fun(request):
+
+    if request.method == "POST":
+        form = DepositForm(request.POST)
+
+        if form.is_valid():
+            deposit = form.save(commit=False)
+            deposit.user = request.user
+            deposit.company_name = request.user.company_name
+            deposit.save()
+
+            messages.success(request, "입금 신청이 완료 되었습니다.")
+            return redirect("wallet:use_list")
+
+        else:
+            print("폼 에러:", form.errors)
+            return render(request, "wallet/deposit.html", {"form": form})
+
+    else:
+        form = DepositForm()
+        return render(request, "wallet/deposit.html", {"form": form})

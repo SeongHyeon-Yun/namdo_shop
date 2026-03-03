@@ -1,6 +1,6 @@
 {% load static %}
 <link rel="stylesheet" href="{% static "css/manager/add_item.css" %}">
-<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+ {{ form.media }}
 <div id="add_area" class="add-item hidden">
     <div class="title-area">
         <h2>상품 등록하기</h2>
@@ -76,7 +76,7 @@
             <div class="form-tit">
                 <label>상품 설명</label>
             </div>
-            <textarea id="editor" name="description"></textarea>
+            {{ form.description }}
             <div class="form-group">
                 <div class="form-tit">
                     <label for="select_name">카테고리</label>

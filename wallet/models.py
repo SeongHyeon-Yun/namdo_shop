@@ -8,6 +8,7 @@ class Deposit(models.Model):
     STATUS_CHOICES = (
         ("pending", "대기"),
         ("confirmed", "완료"),
+        ("refund", "환불"),
         ("rejected", "반려"),
     )
 

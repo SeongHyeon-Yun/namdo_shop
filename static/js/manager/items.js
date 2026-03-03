@@ -12,27 +12,6 @@ close_btn.addEventListener('click', () => {
     add_area.classList.add("hidden");
 })
 
-
-ClassicEditor
-    .create(document.querySelector('#editor'), {
-        toolbar: [
-            'bold',
-            'italic',
-            'link',
-            '|',
-            'bulletedList',
-            'numberedList',
-            '|',
-            'imageUpload',
-            '|',
-            'undo',
-            'redo'
-        ]
-    })
-    .catch(error => {
-        console.error(error);
-    });
-
 const del_btn = document.getElementById('del_btn');
 del_btn.addEventListener('click', () => {
     console.log('del-btn test')
@@ -252,10 +231,6 @@ const next_btn = document.getElementById("next-btn");
 const previous_btn = document.getElementById("previous_btn");
 
 let img_count = 1;
-
-
-
-
 
 // 🔥 캐러셀 이미지 전환 함수
 function show_img(index) {

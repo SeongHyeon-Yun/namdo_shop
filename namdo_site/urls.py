@@ -11,6 +11,7 @@ urlpatterns = [
     path("wallet/", include("wallet.urls")),
     path("manager/", include("manager.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
+    path("ckeditor5/", include("django_ckeditor_5.urls")),
 ]
 
 if settings.DEBUG:

@@ -15,7 +15,8 @@
     <div>
         <ul class="item_tab_menus">
             {% for value, label in tab %}
-                <li role="tab" class="{% if current_status == value %}tab-active{% endif %}">
+                <li role="tab"
+                    class="{% if current_status == value %}tab-active{% endif %}">
                     <a href="{% querystring status=value %}" class="btn-tab">{{ label }}</a>
                 </li>
             {% endfor %}
